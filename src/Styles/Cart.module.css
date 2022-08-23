@@ -1,0 +1,15 @@
+.cartContainer{
+    background-image: url('../Images/Home.jpg');
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ul{
+    list-style-type: none;
+}
+table{
+    background-color: lightgrey;
+    width:80%
+}

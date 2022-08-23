@@ -14,8 +14,6 @@ const Home = () => {
                 <p>0900 - 0500</p>
                 <p>Saturday - Sunday</p>
                 <p>Closed</p>
- 
-
             </div>
         </div>
     )
