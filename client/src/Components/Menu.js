@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import axios from 'axios';
 import { CartContext } from "./CartContext";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -9,6 +10,7 @@ import styles from "../Styles/Menu.module.css";
 
 const Menu = () => {
   const [cart, setCart] = useContext(CartContext);
+
   const menuItems = [
     { name: "Brisket", price: 100},
     { name: "Pork", price: 100},
