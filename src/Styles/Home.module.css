@@ -1,0 +1,13 @@
+.homeContainer{
+    background-image: url('../Images/Home.jpg');
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+.quote{
+    font-size: 1.5rem;
+    color: white;
+    font-style: italic;
+}
