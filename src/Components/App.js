@@ -2,6 +2,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import DarkNavbar from './DarkNavbar'
 import Menu from './Menu';
 import Home from './Home'
+import Cart from './Cart'
 import '../Styles/App.css';
 
 function App() {
@@ -11,6 +12,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />}/>
         <Route path='/menu' element={<Menu />} />
+        <Route path='/cart' element={<Cart />} />
+
       </Routes>
     </BrowserRouter>
   );
