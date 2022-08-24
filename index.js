@@ -19,7 +19,7 @@ app.get('*', (req,res) => {
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(()=>{
         app.listen(process.env.PORT, '0.0.0.0', () => {
-            console.log(`db connected and server now listening on ${PORT}`);
+            console.log(`db connected and server now listening on`);
           });
     })
     .catch((error) => {
