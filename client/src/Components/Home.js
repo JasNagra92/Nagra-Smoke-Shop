@@ -14,8 +14,11 @@ const Home = () => {
                 <p>0900 - 0500</p>
                 <p>Saturday - Sunday</p>
                 <p>Closed</p>
+<<<<<<< HEAD
  
 
+=======
+>>>>>>> 5f034400bb736fb2668b2e5b61d0fa33b61fc771
             </div>
         </div>
     )

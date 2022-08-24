@@ -2,10 +2,20 @@
   "name": "nagra-smoke-shop",
   "version": "0.1.0",
   "private": true,
+<<<<<<< HEAD
+=======
+  "engines": {
+    "node": "16.16.0"
+  },
+>>>>>>> 5f034400bb736fb2668b2e5b61d0fa33b61fc771
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+<<<<<<< HEAD
+=======
+    "axios": "^0.27.2",
+>>>>>>> 5f034400bb736fb2668b2e5b61d0fa33b61fc771
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
@@ -14,6 +24,10 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
+<<<<<<< HEAD
+=======
+  "proxy": "http://localhost:8080",
+>>>>>>> 5f034400bb736fb2668b2e5b61d0fa33b61fc771
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

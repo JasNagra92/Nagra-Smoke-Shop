@@ -1,5 +1,11 @@
 .menuContainer{
     background-image: url('../Images/Home.jpg');
     background-size: cover;
+<<<<<<< HEAD
     height: 96vh
+=======
+}
+.card-img-top{
+    height: 20px;
+>>>>>>> 5f034400bb736fb2668b2e5b61d0fa33b61fc771
 }
