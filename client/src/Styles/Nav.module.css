@@ -1,0 +1,13 @@
+.cart{
+    position:absolute;
+    bottom: 3px;
+    background-color: blue;
+    border-radius: 50%;
+    width:20px;
+    text-align: center;
+    color: white;
+}
+.link{
+    text-decoration: none;
+    color:grey
+}
