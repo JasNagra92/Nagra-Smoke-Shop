@@ -16,7 +16,7 @@ app.get('*', (req,res) => {
     res.sendFile(path.resolve(__dirname,'./client/build', 'index.html'))
 })
 
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(()=>{
         app.listen(process.env.PORT, '0.0.0.0', () => {
             console.log(`db connected and server now listening on`);
