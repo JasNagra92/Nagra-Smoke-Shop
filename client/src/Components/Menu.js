@@ -7,7 +7,7 @@ import brisket from "../Images/brisket.jpg";
 import pork from "../Images/Pork-Butt.jpg";
 import rib from "../Images/PrimeRib.jpg";
 import styles from "../Styles/Menu.module.css";
-axios.defaults.baseURL = process.env.baseURL || 'http://localhost:4000';
+axios.defaults.baseURL = process.env.baseURL 
 
 const Menu = () => {
   const [cart, setCart] = useContext(CartContext);
