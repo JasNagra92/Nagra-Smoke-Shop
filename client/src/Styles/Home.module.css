@@ -6,11 +6,7 @@
     gap: 50px;
     padding-top: 20px;
     align-items: center;
-<<<<<<< HEAD
-    height: 95vh;
-=======
     height: 100vh;
->>>>>>> 5f034400bb736fb2668b2e5b61d0fa33b61fc771
 }
 .quote{
     font-size: 1.5rem;
@@ -19,11 +15,7 @@
 }
 .quoteContainer,
 .hoursContainer{
-<<<<<<< HEAD
-    background-color: rgba(180,180,180, 0.4);
-=======
     background-color: rgba(180,180,180, 0.8);
->>>>>>> 5f034400bb736fb2668b2e5b61d0fa33b61fc771
     border-radius: 20px;
     padding: 10px;
 }
