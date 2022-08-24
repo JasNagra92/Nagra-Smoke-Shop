@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-import React, {useContext} from "react";
-import { CartContext } from "./CartContext";
-
-const Cart = () => {
-    const [cart,setCart] = useContext(CartContext)
-    return (
-        <div>
-            
-        </div>
-    )
-}
-export default Cart
-=======
 import React, { useContext } from "react";
 import { CartContext } from "./CartContext";
 import styles from "../Styles/Cart.module.css";
@@ -42,4 +28,3 @@ const Cart = () => {
   );
 };
 export default Cart;
->>>>>>> 5f034400bb736fb2668b2e5b61d0fa33b61fc771
