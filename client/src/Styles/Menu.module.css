@@ -1,6 +1,7 @@
 .menuContainer{
     background-image: url('../Images/Home.jpg');
     background-size: cover;
+    height: 100vh
 }
 .card-img-top{
     height: 20px;

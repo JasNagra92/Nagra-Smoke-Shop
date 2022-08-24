@@ -1,14 +1,24 @@
-import React, { useContext} from "react";
+import React, { useContext, useEffect} from "react";
 import { CartContext } from "./CartContext";
+import axios from 'axios'
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import brisket from "../Images/brisket.jpg";
 import pork from "../Images/Pork-Butt.jpg";
 import rib from "../Images/PrimeRib.jpg";
 import styles from "../Styles/Menu.module.css";
+axios.defaults.baseURL = 'http://localhost:4000';
 
 const Menu = () => {
   const [cart, setCart] = useContext(CartContext);
+
+  useEffect(()=>{
+    const getMenuItems = async () => {
+      const menuItems = await axios.get('/api/menu')
+      console.log(menuItems)
+    }
+    getMenuItems()
+  }, [])
 
   const menuItems = [
     { name: "Brisket", price: 100},
