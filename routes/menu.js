@@ -6,6 +6,9 @@ const mongoose = require('mongoose')
 router.get('/menu', (req, res) => {
     const db = mongoose.connection.db;
     db.collection('menuItems').find().toArray((err, result) => {
+        if (err) {
+            res.status(400).json({err:err})
+        }
         res.status(200).json({ result });
     });
 });
