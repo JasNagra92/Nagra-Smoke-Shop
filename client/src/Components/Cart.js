@@ -2,13 +2,44 @@ import React, { useState, useContext, useEffect } from 'react';
 import { CartContext } from './CartContext';
 import styles from '../Styles/Cart.module.css';
 import axios from 'axios';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
+import CustomerInfoForm from './CustomerInfoForm';
+
 axios.defaults.baseURL =
   process.env.REACT_APP_baseURL || 'http://localhost:4000';
 
 const Cart = () => {
   const [cart] = useContext(CartContext);
   const [order, setOrder] = useState([]);
+  const [customerInfo, setCustomerInfo] = useState({
+    fname: '',
+    lname: '',
+    street_address: '',
+    city: '',
+    postal_code: '',
+  });
+
+  const handleInput = (e) => {
+    setCustomerInfo({
+      ...customerInfo,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async () => {
+    try {
+      console.log(order);
+      let payload;
+      payload = {
+        ...customerInfo,
+        items: order,
+      };
+      const response = await axios.post('/api/order', { payload });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     const showOrder = async () => {
@@ -46,11 +77,24 @@ const Cart = () => {
                 );
               })}
             </table>
+            <div className={styles.customerForm}>
+              <CustomerInfoForm
+                handleInput={handleInput}
+                customerInfo={customerInfo}
+              />
+            </div>
             <div className={styles.totalDiv}>
-              <Button>
+              <Button
+                onClick={() => {
+                  handleSubmit();
+                }}
+              >
                 Checkout
               </Button>
-              <h4>Total: ${order.reduce((total, current) => total + current.price, 0 )}</h4>
+              <h4>
+                Total: $
+                {order.reduce((total, current) => total + current.price, 0)}
+              </h4>
             </div>
           </div>
         </div>

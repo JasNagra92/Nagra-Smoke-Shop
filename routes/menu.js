@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose')
 
-router.get('/menu', (req, res) => {
+router.get('/', (req, res) => {
     const db = mongoose.connection.db;
     db.collection('menuItems').find({}).project({_id:1}).sort({name:'ascending'}).toArray((err, result) => {
         if (err) {

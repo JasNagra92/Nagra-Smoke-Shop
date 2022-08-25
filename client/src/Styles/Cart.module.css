@@ -50,3 +50,7 @@ h2{
     display: flex;
     gap: 10px;
 }
+.customerForm{
+    display:flex;
+    flex-direction: column
+}

@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const ObjectID = require('mongodb').ObjectID;
 
-router.post('/cart', async (req, res) => {
+router.post('/', async (req, res) => {
   const db = mongoose.connection.db;
   const cart = req.body.cart;
   let data = [];

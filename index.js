@@ -5,15 +5,17 @@ const cors = require('cors');
 const app = express();
 const mongoose = require('mongoose')
 const menuRoutes = require('./routes/menu');
-const cartRoutes = require('./routes/cart')
+const cartRoutes = require('./routes/cart');
+const orderRoutes = require('./routes/order')
 
 app.use(cors());
 app.use(express.json());
 
 app.use(express.static(path.resolve(__dirname, './client/build')))
 
-app.use('/api', menuRoutes);
-app.use('/api', cartRoutes)
+app.use('/api/menu', menuRoutes);
+app.use('/api/cart', cartRoutes);
+app.use('/api/order', orderRoutes)
 
 app.get('*', (req,res) => {
     res.sendFile(path.resolve(__dirname,'./client/build', 'index.html'))
