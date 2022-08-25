@@ -27,7 +27,7 @@ th{
     justify-content: center;
     background-color: lightcyan;
     height: 50vh;
-    width: 70vw;
+    width: 50vw;
     border-radius: 15px;
 }
 .tableDiv{
@@ -48,5 +48,5 @@ h2{
 }
 .totalDiv{
     display: flex;
-    gap: 10px
+    gap: 10px;
 }

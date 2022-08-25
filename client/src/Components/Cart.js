@@ -50,7 +50,7 @@ const Cart = () => {
               <Button>
                 Checkout
               </Button>
-              <h4>Total: </h4>
+              <h4>Total: ${order.reduce((total, current) => total + current.price, 0 )}</h4>
             </div>
           </div>
         </div>
