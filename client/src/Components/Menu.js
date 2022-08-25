@@ -1,4 +1,4 @@
-import React, { useContext, useEffect} from "react";
+import React, { useState, useContext, useEffect} from "react";
 import { CartContext } from "./CartContext";
 import axios from 'axios'
 import Button from "react-bootstrap/Button";
@@ -11,20 +11,16 @@ axios.defaults.baseURL = process.env.REACT_APP_baseURL || 'http://localhost:4000
 
 const Menu = () => {
   const [cart, setCart] = useContext(CartContext);
+  const [menuItems,setMenuItems] = useState([]);
 
   useEffect(()=>{
     const getMenuItems = async () => {
-      const menuItems = await axios.get('/api/menu')
-      console.log(menuItems)
+      let data = await axios.get('/api/menu')
+      setMenuItems(data.data.result)
     }
     getMenuItems()
   }, [])
 
-  const menuItems = [
-    { name: "Brisket", price: 100},
-    { name: "Pork", price: 100},
-    { name: 'Primerib', price: 100}
-  ];
   const handleClick = (item) => {
     setCart([...cart, item]);
   };

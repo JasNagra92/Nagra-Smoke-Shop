@@ -3,6 +3,7 @@
     background-size: cover;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -11,5 +12,41 @@ ul{
 }
 table{
     background-color: lightgrey;
-    width:80%
+    width:80%;
+}
+td,
+th{
+    width:500px;
+    border: 1px solid black
+}
+th{
+    text-align: center;
+}
+.cartDiv{
+    display: flex;
+    justify-content: center;
+    background-color: lightcyan;
+    height: 50vh;
+    width: 70vw;
+    border-radius: 15px;
+}
+.tableDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:10px
+}
+.heading{
+    text-align: center;
+    background-color: black;
+    color: white;
+}
+h2{
+    margin-bottom: 0;
+    font-size: 3vw;
+}
+.totalDiv{
+    display: flex;
+    gap: 10px
 }
