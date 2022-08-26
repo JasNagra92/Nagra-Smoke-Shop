@@ -4,6 +4,7 @@ import DarkNavbar from './DarkNavbar'
 import Menu from './Menu';
 import Home from './Home'
 import Cart from './Cart'
+import OrderConfirmation from './OrderConfirmation';
 import '../Styles/App.css';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path='/' element={<Home />}/>
           <Route path='/menu' element={<Menu />} />
           <Route path='/cart' element={<Cart />} />
+          <Route path='/confirmation' element={<OrderConfirmation />} />
         </Routes>
       </CartProvider>
     </BrowserRouter>
