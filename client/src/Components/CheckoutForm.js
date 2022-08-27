@@ -34,12 +34,8 @@ export default function CheckoutForm({ order }) {
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
-          try {
-          const response = axios.post('/api/order', { order });
-          setConfirmedOrder(response)
-          } catch (error) {
-            console.log(error)
-          }
+          console.log('test')
+          setMessage('Payment succeeded!')
           break;
         case "processing":
           setMessage("Your payment is processing.");
@@ -86,6 +82,7 @@ export default function CheckoutForm({ order }) {
           {isLoading ? <div className="spinner" id="spinner"></div> : "Pay Now"}
         </span>
       </button>
+      {message && <div id='payment-message'>{message}</div>}
     </form>
   );
 }
