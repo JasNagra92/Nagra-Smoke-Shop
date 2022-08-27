@@ -1,34 +1,36 @@
-import { loadStripe } from '@stripe/stripe-js';
-import CheckoutForm from './CheckoutForm';
-import { Elements } from '@stripe/react-stripe-js';
-import React, { useState, useContext, useEffect } from 'react';
-import { CartContext } from './CartContext';
-import styles from '../Styles/Cart.module.css';
-import '../Styles/cart.css'
-import axios from 'axios';
-import CustomerInfoForm from './CustomerInfoForm';
-import DatePicker from 'react-datepicker';
-import { addDays } from 'date-fns';
-import 'react-datepicker/dist/react-datepicker.css';
-const stripePromise = loadStripe(
-  'pk_test_51Lb9wkAAgyKcvNJTbuAGKXtD8UAhxfj2FQznLCWYq5nObuiZIDfuTygsXYmvcMVRnpTUxSQdJOuudy74cDcZUA2G004ymPeyIJ'
-);
+import { loadStripe } from "@stripe/stripe-js";
+import CheckoutForm from "./CheckoutForm";
+import { Elements } from "@stripe/react-stripe-js";
+
+import React, { useState, useContext, useEffect } from "react";
+import { CartContext } from "./CartContext";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import styles from "../Styles/Cart.module.css";
+import "../Styles/cart.css";
+import axios from "axios";
+import CustomerInfoForm from "./CustomerInfoForm";
+import { addDays } from "date-fns";
 axios.defaults.baseURL =
-  process.env.REACT_APP_baseURL || 'http://localhost:4000';
+  process.env.REACT_APP_baseURL || "http://localhost:4000";
+const stripePromise = loadStripe(
+  "pk_test_51Lb9wkAAgyKcvNJTbuAGKXtD8UAhxfj2FQznLCWYq5nObuiZIDfuTygsXYmvcMVRnpTUxSQdJOuudy74cDcZUA2G004ymPeyIJ"
+);
 
 const Cart = () => {
-  const [clientSecret, setClientSecret] = useState('');
+  const [clientSecret, setClientSecret] = useState("");
   const [cart] = useContext(CartContext);
-  const [disabled, setDisabled] = useState(false);
+  const [showPayForm, setShowPayForm] = useState(false);
   const [order, setOrder] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [customerInfo, setCustomerInfo] = useState({
-    fname: '',
-    lname: '',
-    street_address: '',
-    city: '',
-    postal_code: '',
+    fname: "",
+    lname: "",
+    street_address: "",
+    city: "",
+    postal_code: "",
   });
+  const payload = { ...customerInfo, items: order, deliveryDate: startDate };
 
   const handleInput = (e) => {
     setCustomerInfo({
@@ -37,51 +39,34 @@ const Cart = () => {
     });
   };
 
-  // useEffect(() => {
-  //   if (
-  //     !customerInfo.fname ||
-  //     !customerInfo.lname ||
-  //     !customerInfo.street_address ||
-  //     !customerInfo.city ||
-  //     !customerInfo.postal_code
-  //   ) {
-  //     setDisabled(true);
-  //   } else {
-  //     setDisabled(false);
-  //   }
-  // }, [customerInfo]);
+  useEffect(() => {
+    if (
+      !customerInfo.fname ||
+      !customerInfo.lname ||
+      !customerInfo.street_address ||
+      !customerInfo.city ||
+      !customerInfo.postal_code
+    ) {
+      setShowPayForm(false);
+    } else {
+      setShowPayForm(true);
+    }
+  }, [customerInfo]);
 
   useEffect(() => {
-    fetch('/create-payment-intent', {
-      method: 'POST',
-      header: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items: [{ id: 'xl-tshirt' }] }),
+    fetch("/create-payment-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ cart }),
     })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
   }, []);
 
-
-  // try {
-  //   console.log(order);
-  //   let payload;
-  //   payload = {
-  //     ...customerInfo,
-  //     items: order,
-  //     deliveryDate: startDate,
-  //   };
-  //   const response = await axios.post('/api/order', { payload });
-  //   console.log(response);
-  //   navigate('/confirmation', {state: {order: response.data}});
-  // } catch (error) {
-  //   console.log(error);
-  // }
-  // };
-
   useEffect(() => {
     const showOrder = async () => {
       try {
-        const response = await axios.post('/api/cart', { cart });
+        const response = await axios.post("/api/cart", { cart });
         setOrder(response.data);
       } catch (error) {
         console.log(error);
@@ -91,12 +76,12 @@ const Cart = () => {
   }, []);
 
   const appearance = {
-    theme: 'stripe'
-  }
+    theme: "stripe",
+  };
   const options = {
     clientSecret,
-    appearance
-  }
+    appearance,
+  };
 
   return (
     <div>
@@ -139,13 +124,11 @@ const Cart = () => {
               />
             </div>
             <div className={styles.totalDiv}>
-
-                {clientSecret && disabled && 
-                  <Elements options = {options} stripe={stripePromise}>
-                    <CheckoutForm />
-                  </Elements>
-                }
-
+              {clientSecret && showPayForm && (
+                <Elements options={options} stripe={stripePromise}>
+                  <CheckoutForm order={payload} />
+                </Elements>
+              )}
               <h4>
                 Total: $
                 {order.reduce((total, current) => total + current.price, 0)}

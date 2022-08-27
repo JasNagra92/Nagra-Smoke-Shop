@@ -1,13 +1,15 @@
-// import { useLocation } from 'react-router-dom'
+import { useContext } from 'react'
+import { ConfirmedOrderContext } from './ConfirmedOrderContext'
 import styles from '../Styles/OrderConfirmation.module.css'
 const OrderConfirmation = () => {
-    // const data = useLocation()
-    // const { order } = data.state
+    const [confirmedOrder] = useContext(ConfirmedOrderContext)
 
     return (
         <div className={styles.mainContainer}>
             <div className="container">
-                <h1>Your Order Number: </h1>
+                {confirmedOrder.map(item=>{
+                    return <p>{item}</p>
+                })}
             </div>
         </div>
     )
