@@ -1,22 +1,27 @@
+import { loadStripe } from '@stripe/stripe-js';
+import CheckoutForm from './CheckoutForm';
+import { Elements } from '@stripe/react-stripe-js';
 import React, { useState, useContext, useEffect } from 'react';
-import {useNavigate} from 'react-router-dom';
 import { CartContext } from './CartContext';
 import styles from '../Styles/Cart.module.css';
+import '../Styles/cart.css'
 import axios from 'axios';
-import Button from 'react-bootstrap/Button';
 import CustomerInfoForm from './CustomerInfoForm';
 import DatePicker from 'react-datepicker';
 import { addDays } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
-
+const stripePromise = loadStripe(
+  'pk_test_51Lb9wkAAgyKcvNJTbuAGKXtD8UAhxfj2FQznLCWYq5nObuiZIDfuTygsXYmvcMVRnpTUxSQdJOuudy74cDcZUA2G004ymPeyIJ'
+);
 axios.defaults.baseURL =
   process.env.REACT_APP_baseURL || 'http://localhost:4000';
 
 const Cart = () => {
+  const [clientSecret, setClientSecret] = useState('');
   const [cart] = useContext(CartContext);
-  const [disabled, setDisabled] = useState(true);
+  const [disabled, setDisabled] = useState(false);
   const [order, setOrder] = useState([]);
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(null);
   const [customerInfo, setCustomerInfo] = useState({
     fname: '',
     lname: '',
@@ -24,7 +29,6 @@ const Cart = () => {
     city: '',
     postal_code: '',
   });
-  let navigate = useNavigate();
 
   const handleInput = (e) => {
     setCustomerInfo({
@@ -33,35 +37,46 @@ const Cart = () => {
     });
   };
 
-  useEffect(() => {
-    if (
-      !customerInfo.fname ||
-      !customerInfo.lname ||
-      !customerInfo.street_address ||
-      !customerInfo.city ||
-      !customerInfo.postal_code
-    ) {
-      setDisabled(true);
-    } else {
-      setDisabled(false);
-    }
-  }, [customerInfo]);
+  // useEffect(() => {
+  //   if (
+  //     !customerInfo.fname ||
+  //     !customerInfo.lname ||
+  //     !customerInfo.street_address ||
+  //     !customerInfo.city ||
+  //     !customerInfo.postal_code
+  //   ) {
+  //     setDisabled(true);
+  //   } else {
+  //     setDisabled(false);
+  //   }
+  // }, [customerInfo]);
 
-  const handleSubmit = async () => {
-    try {
-      console.log(order);
-      let payload;
-      payload = {
-        ...customerInfo,
-        items: order,
-      };
-      const response = await axios.post('/api/order', { payload });
-      console.log(response);
-      navigate('/confirmation')
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  useEffect(() => {
+    fetch('/create-payment-intent', {
+      method: 'POST',
+      header: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: [{ id: 'xl-tshirt' }] }),
+    })
+      .then((res) => res.json())
+      .then((data) => setClientSecret(data.clientSecret));
+  }, []);
+
+
+  // try {
+  //   console.log(order);
+  //   let payload;
+  //   payload = {
+  //     ...customerInfo,
+  //     items: order,
+  //     deliveryDate: startDate,
+  //   };
+  //   const response = await axios.post('/api/order', { payload });
+  //   console.log(response);
+  //   navigate('/confirmation', {state: {order: response.data}});
+  // } catch (error) {
+  //   console.log(error);
+  // }
+  // };
 
   useEffect(() => {
     const showOrder = async () => {
@@ -74,6 +89,14 @@ const Cart = () => {
     };
     showOrder();
   }, []);
+
+  const appearance = {
+    theme: 'stripe'
+  }
+  const options = {
+    clientSecret,
+    appearance
+  }
 
   return (
     <div>
@@ -104,24 +127,25 @@ const Cart = () => {
                 handleInput={handleInput}
                 customerInfo={customerInfo}
               />
+              <label>Pickup Date:</label>
               <DatePicker
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
                 minDate={addDays(new Date(), 3)}
+                showTimeSelect
+                timeFormat="HH:mm"
+                dateFormat="MMMM d, yyyy h:mm aa"
+                placeholderText="Pick a day for pickup"
               />
             </div>
             <div className={styles.totalDiv}>
-              {disabled ? (
-                <button disabled>Checkout</button>
-              ) : (
-                <Button
-                  onClick={() => {
-                    handleSubmit();
-                  }}
-                >
-                  Checkout
-                </Button>
-              )}
+
+                {clientSecret && disabled && 
+                  <Elements options = {options} stripe={stripePromise}>
+                    <CheckoutForm />
+                  </Elements>
+                }
+
               <h4>
                 Total: $
                 {order.reduce((total, current) => total + current.price, 0)}
