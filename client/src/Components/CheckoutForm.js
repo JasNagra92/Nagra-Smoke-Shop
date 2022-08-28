@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useNavigate } from 'react-router-dom'
 import { ConfirmedOrderContext } from "./ConfirmedOrderContext";
 import {
   PaymentElement,
@@ -10,7 +9,6 @@ import axios from "axios";
 
 export default function CheckoutForm({ order }) {
   const [confirmedOrder,setConfirmedOrder] = useContext(ConfirmedOrderContext)
-  const navigate = useNavigate()
   const stripe = useStripe();
   const elements = useElements();
   console.log(order);
@@ -34,8 +32,7 @@ export default function CheckoutForm({ order }) {
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
-          console.log('test')
-          setMessage('Payment succeeded!')
+          setMessage('Payment succeeded!');
           break;
         case "processing":
           setMessage("Your payment is processing.");

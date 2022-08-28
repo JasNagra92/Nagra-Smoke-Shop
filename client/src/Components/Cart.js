@@ -1,7 +1,3 @@
-import { loadStripe } from "@stripe/stripe-js";
-import CheckoutForm from "./CheckoutForm";
-import { Elements } from "@stripe/react-stripe-js";
-
 import React, { useState, useContext, useEffect } from "react";
 import { CartContext } from "./CartContext";
 import DatePicker from "react-datepicker";
@@ -13,14 +9,9 @@ import CustomerInfoForm from "./CustomerInfoForm";
 import { addDays } from "date-fns";
 axios.defaults.baseURL =
   process.env.REACT_APP_baseURL || "http://localhost:4000";
-const stripePromise = loadStripe(
-  "pk_test_51Lb9wkAAgyKcvNJTbuAGKXtD8UAhxfj2FQznLCWYq5nObuiZIDfuTygsXYmvcMVRnpTUxSQdJOuudy74cDcZUA2G004ymPeyIJ"
-);
 
 const Cart = () => {
-  const [clientSecret, setClientSecret] = useState("");
   const [cart] = useContext(CartContext);
-  const [showPayForm, setShowPayForm] = useState(false);
   const [order, setOrder] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [customerInfo, setCustomerInfo] = useState({
@@ -39,29 +30,15 @@ const Cart = () => {
     });
   };
 
-  useEffect(() => {
-    if (
-      !customerInfo.fname ||
-      !customerInfo.lname ||
-      !customerInfo.street_address ||
-      !customerInfo.city ||
-      !customerInfo.postal_code
-    ) {
-      setShowPayForm(false);
-    } else {
-      setShowPayForm(true);
-    }
-  }, [customerInfo]);
-
-  useEffect(() => {
-    fetch("/create-payment-intent", {
+  const handleSubmit = async () => {
+    const res = await fetch("/create-checkout-session", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ cart }),
-    })
-      .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret));
-  }, []);
+      body: JSON.stringify({ payload }),
+    });
+    const target = await res.json();
+    window.location.href = target.url
+  };
 
   useEffect(() => {
     const showOrder = async () => {
@@ -74,14 +51,6 @@ const Cart = () => {
     };
     showOrder();
   }, []);
-
-  const appearance = {
-    theme: "stripe",
-  };
-  const options = {
-    clientSecret,
-    appearance,
-  };
 
   return (
     <div>
@@ -124,11 +93,7 @@ const Cart = () => {
               />
             </div>
             <div className={styles.totalDiv}>
-              {clientSecret && showPayForm && (
-                <Elements options={options} stripe={stripePromise}>
-                  <CheckoutForm order={payload} />
-                </Elements>
-              )}
+              <button onClick={handleSubmit}>checkout</button>
               <h4>
                 Total: $
                 {order.reduce((total, current) => total + current.price, 0)}

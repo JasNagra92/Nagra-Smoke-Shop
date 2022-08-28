@@ -6,11 +6,7 @@ const OrderConfirmation = () => {
 
     return (
         <div className={styles.mainContainer}>
-            <div className="container">
-                {confirmedOrder.map(item=>{
-                    return <p>{item}</p>
-                })}
-            </div>
+            <h1>test</h1>
         </div>
     )
 }

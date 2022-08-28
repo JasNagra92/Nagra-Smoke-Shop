@@ -26,8 +26,8 @@ th{
     display: flex;
     justify-content: center;
     background-color: lightcyan;
-    height: 50vh;
-    width: 50vw;
+    height: 75vh;
+    width: 65vw;
     border-radius: 15px;
 }
 .tableDiv{
