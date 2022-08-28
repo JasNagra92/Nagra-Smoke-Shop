@@ -15,13 +15,10 @@ const Cart = () => {
   const [order, setOrder] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [customerInfo, setCustomerInfo] = useState({
-    fname: "",
-    lname: "",
-    street_address: "",
-    city: "",
-    postal_code: "",
+    name: '',
+    email: ''
   });
-  const payload = { ...customerInfo, items: order, deliveryDate: startDate };
+  const payload = { ...customerInfo, items: order, pickupDate: startDate };
 
   const handleInput = (e) => {
     setCustomerInfo({
@@ -34,7 +31,7 @@ const Cart = () => {
     const res = await fetch("/create-checkout-session", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ payload }),
+      body: JSON.stringify({ payload: payload }),
     });
     const target = await res.json();
     window.location.href = target.url

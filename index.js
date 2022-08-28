@@ -12,8 +12,8 @@ const mongoose = require('mongoose');
 const menuRoutes = require('./routes/menu');
 const cartRoutes = require('./routes/cart');
 const orderRoutes = require('./routes/order');
-const webHookRoute = require('./routes/webhook');
 const testRoute = require('./routes/create-checkout-session')
+const webHookRoute = require('./routes/webHookRoute')
 
 app.use(cors());
 app.use((req, res, next) => {
@@ -30,6 +30,7 @@ app.use('/api/menu', menuRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/order', orderRoutes);
 app.use('/create-checkout-session', testRoute);
+app.use('/webhook', webHookRoute)
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));

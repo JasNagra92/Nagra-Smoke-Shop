@@ -6,13 +6,10 @@ const mongoose = require('mongoose');
 router.post('/', async (req, res) => {
   console.log(req)
   const {
-    fname,
-    lname,
-    street_address,
-    city,
-    postal_code,
+    name,
+    email,
     items,
-    deliveryDate,
+    pickupDate,
   } = req.body.payload;
 
   const randomInt = (min, max) => {
@@ -33,17 +30,12 @@ router.post('/', async (req, res) => {
   } while (repeat);
 
   let order = new Order({
-    fname: fname,
-    lname: lname,
+    name: name,
+    email: email,
     items: items,
     orderNumber: orderNumber,
-    address: {
-      street_address: street_address,
-      city: city,
-      postal_code: postal_code,
-    },
     paid: false,
-    deliveryDate: deliveryDate,
+    pickupDate: pickupDate,
   });
   try {
     const doc = await order.save();
