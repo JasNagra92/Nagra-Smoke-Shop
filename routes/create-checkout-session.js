@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
         pickupDate: payload.pickupDate
     },
     mode: 'payment',
-    success_url: `${YOUR_DOMAIN}?success=true`,
+    success_url: `${YOUR_DOMAIN}/success?id={CHECKOUT_SESSION_ID}` ,
     cancel_url: `${YOUR_DOMAIN}?canceled=true`,
     automatic_tax: {enabled: false},
   });
