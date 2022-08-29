@@ -8,6 +8,7 @@ import { CartContext } from './CartContext';
 import styles from '../Styles/Nav.module.css';
 
 const DarkNavbar = () => {
+  // import cart from context provider to update number of items
   const [cart, setCart] = useContext(CartContext);
   return (
     <div>

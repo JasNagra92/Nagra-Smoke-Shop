@@ -7,6 +7,8 @@ import "../Styles/cart.css";
 import axios from "axios";
 import CustomerInfoForm from "./CustomerInfoForm";
 import { addDays } from "date-fns";
+
+// react_app_baseURL is env variable provided by heroku on hosting
 axios.defaults.baseURL =
   process.env.REACT_APP_baseURL || "http://localhost:4000";
 
@@ -19,6 +21,7 @@ const Cart = () => {
     name: '',
     email: ''
   });
+  // payload will be used in fetch request to send order information to server
   const payload = { ...customerInfo, items: order, pickupDate: startDate };
 
   const handleInput = (e) => {
@@ -27,12 +30,15 @@ const Cart = () => {
       [e.target.name]: e.target.value,
     });
   };
+  // disable checkout button until all fields are flled in
   useEffect(()=>{
     if (customerInfo && startDate) {
       setDisableBtn(false)
     } else {setDisableBtn(true)}
   }, [customerInfo, startDate])
 
+  // send cart information along with customer info to server to create stripe checkout session
+  // this will redirect the user to the url sent in the response from the server
   const handleSubmit = async () => {
     const res = await fetch("/create-checkout-session", {
       method: "POST",
@@ -43,6 +49,8 @@ const Cart = () => {
     window.location.href = target.url
   };
 
+  // on component mount, request to server with cart item _ids will fetch the prices from server
+  // in order to render them on the cart summary
   useEffect(() => {
     const showOrder = async () => {
       try {

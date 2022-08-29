@@ -12,7 +12,8 @@ axios.defaults.baseURL = process.env.REACT_APP_baseURL || 'http://localhost:4000
 const Menu = () => {
   const [cart, setCart] = useContext(CartContext);
   const [menuItems,setMenuItems] = useState([]);
-
+// use effect will retrieve items and their prices from the server to prevent price
+// manipulation and set them in state variable
   useEffect(()=>{
     const getMenuItems = async () => {
       let data = await axios.get('/api/menu')
@@ -20,7 +21,8 @@ const Menu = () => {
     }
     getMenuItems()
   }, [])
-
+// on click will set the menu items in cart but only their _ids,
+// only _ids will be sent to server then prices will be fetched from mongoDB
   const handleClick = (item) => {
     setCart([...cart, item]);
   };
@@ -43,6 +45,7 @@ const Menu = () => {
                   >
                     Add to Cart
                   </Button>
+                  <h5>Stock available: {menuItems[0].stock}</h5>
                 </Card.Body>
               </Card>
             </div>
@@ -64,6 +67,7 @@ const Menu = () => {
                   >
                     Add to Cart
                   </Button>
+                  <h5>Stock available: {menuItems[1].stock}</h5>
                 </Card.Body>
               </Card>
             </div>
@@ -81,6 +85,7 @@ const Menu = () => {
                   >
                     Add to Cart
                   </Button>
+                  <h5>Stock available: {menuItems[2].stock}</h5>
                 </Card.Body>
               </Card>
             </div>

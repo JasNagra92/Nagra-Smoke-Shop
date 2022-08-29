@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+// the layout every order document will have in the database
 const OrderSchema = new Schema({
   name: { type: String, required: true },
   email: {type: String, required: true},

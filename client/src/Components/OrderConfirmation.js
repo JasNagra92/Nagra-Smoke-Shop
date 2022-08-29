@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import styles from "../Styles/OrderConfirmation.module.css";
 const OrderConfirmation = () => {
   const [confirmedOrder, setConfirmedOrder] = useState();
-
+// this page will be rendered on redirect after successfull checkout session
+// server side route appends the checkout session ID to the URL upon
+// successfull redirect, that id is then used to fetch the corresponding
+// order from mongoDB and then display it on the thank you page
   const queryParams = new URLSearchParams(window.location.search);
   const id = queryParams.get("id");
 
