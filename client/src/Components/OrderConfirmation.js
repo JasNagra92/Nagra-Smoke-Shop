@@ -1,10 +1,71 @@
-import styles from '../Styles/OrderConfirmation.module.css'
+import { useEffect, useState } from "react";
+import styles from "../Styles/OrderConfirmation.module.css";
 const OrderConfirmation = () => {
+  const [confirmedOrder, setConfirmedOrder] = useState();
 
-    return (
-        <div className={styles.mainContainer}>
-            <h1>test</h1>
+  const queryParams = new URLSearchParams(window.location.search);
+  const id = queryParams.get("id");
+
+  useEffect(() => {
+    try {
+      fetch("/checkout-session?id=" + id)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          setConfirmedOrder(data);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  return (
+    <div className={styles.mainContainer}>
+      {confirmedOrder && (
+        <div className="container">
+          <div className={styles.receiptContainer}>
+            <div className={styles.thankYou}>
+              <h3>Thank you for your order {confirmedOrder.name}</h3>
+            </div>
+            <div className={styles.checkInbox}>
+              check your inbox for confirmation email
+            </div>
+            <div className={styles.orderDetails}>
+              Order Number - {confirmedOrder.orderNumber}
+            </div>
+
+            <div className={styles.total}>
+              <h5>Order Total</h5>
+              <p>$ 100.00</p>
+            </div>
+            <div className={styles.date}>
+              <h5>Order Date</h5>
+              <p>10-10-2022 10:30</p>
+            </div>
+            <div className={styles.method}>
+              <h5>Payment Method</h5>
+              <p>card</p>
+            </div>
+
+            <div className={styles.email}>
+              <h5>Email</h5>
+              <p>test@hotmail.com</p>
+            </div>
+            <div className={styles.pdate}>
+              <h5>Pick up Date</h5>
+              <p>10-10-2022</p>
+            </div>
+            <div className={styles.delivery}>
+              <h5>Delivery Option</h5>
+              <p>frozen</p>
+            </div>
+
+            <div className={styles.footer}>Created by Jas Nagra</div>
+          </div>
         </div>
-    )
-}
-export default OrderConfirmation
+      )}
+    </div>
+  );
+};
+export default OrderConfirmation;

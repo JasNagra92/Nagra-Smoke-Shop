@@ -9,11 +9,6 @@ const stripe = require("stripe")(
 const endpointSecret =
   "whsec_6b80fda20b62f1cdd04a7e4df2073cdddba1116601ffcebc47c65dd2e97cb03c";
 
-// const addOrderToDb = (session) => {
-//     const db = mongoose.connection.db
-
-// }
-
 router.post("/", express.raw({ type: "application/json" }), (req, res) => {
   const payload = req.body;
   console.log("got payload:" + payload);
@@ -48,7 +43,7 @@ router.post("/", express.raw({ type: "application/json" }), (req, res) => {
     let orderNumber;
     let repeat;
     do {
-      orderNumber = randomInt(100000, 999999);
+      orderNumber = randomInt(999999, 100000);
       repeat = checkOrderNumber(orderNumber) ? false : true;
     } while (repeat);
 
@@ -62,6 +57,7 @@ router.post("/", express.raw({ type: "application/json" }), (req, res) => {
         let order = new Order({
           name: name,
           email: email,
+          checkoutSessionId: id,
           paid: true,
           pickupDate: pickupDate.pickupDate,
           orderNumber: orderNumber,

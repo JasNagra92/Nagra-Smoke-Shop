@@ -12,6 +12,7 @@ axios.defaults.baseURL =
 
 const Cart = () => {
   const [cart] = useContext(CartContext);
+  const [disableBtn, setDisableBtn] = useState(true)
   const [order, setOrder] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [customerInfo, setCustomerInfo] = useState({
@@ -26,6 +27,11 @@ const Cart = () => {
       [e.target.name]: e.target.value,
     });
   };
+  useEffect(()=>{
+    if (customerInfo && startDate) {
+      setDisableBtn(false)
+    } else {setDisableBtn(true)}
+  }, [customerInfo, startDate])
 
   const handleSubmit = async () => {
     const res = await fetch("/create-checkout-session", {
@@ -74,23 +80,25 @@ const Cart = () => {
               })}
             </table>
             <div className={styles.customerForm}>
-              <CustomerInfoForm
-                handleInput={handleInput}
-                customerInfo={customerInfo}
-              />
-              <label>Pickup Date:</label>
-              <DatePicker
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-                minDate={addDays(new Date(), 3)}
-                showTimeSelect
-                timeFormat="HH:mm"
-                dateFormat="MMMM d, yyyy h:mm aa"
-                placeholderText="Pick a day for pickup"
-              />
+              <div>
+                <CustomerInfoForm
+                  handleInput={handleInput}
+                  customerInfo={customerInfo}
+                />
+                <label>Pickup Date:</label>
+                <DatePicker
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                  minDate={addDays(new Date(), 3)}
+                  showTimeSelect
+                  timeFormat="HH:mm"
+                  dateFormat="MMMM d, yyyy h:mm aa"
+                  placeholderText="Pick a day for pickup"
+                />
+              </div>
             </div>
             <div className={styles.totalDiv}>
-              <button onClick={handleSubmit}>checkout</button>
+              <button onClick={handleSubmit} disabled= {disableBtn ? true : false}>checkout</button>
               <h4>
                 Total: $
                 {order.reduce((total, current) => total + current.price, 0)}
