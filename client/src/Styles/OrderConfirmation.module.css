@@ -2,7 +2,7 @@
     background-image: url(../Images/Home.jpg);
     background-size:cover;
     height: 100vh;
-    padding-top: 20vh;
+    padding-top: 10vh;
 }
 .receiptContainer{
     display: grid;

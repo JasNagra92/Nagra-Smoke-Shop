@@ -1,12 +1,12 @@
 .menuContainer{
     background-image: url('../Images/Home.jpg');
     background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
     height: 100vh
 }
-.card-img-top{
-    height: 20px;
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
 }
 h5{
     padding-top: 10px;

@@ -64,7 +64,7 @@ const OrderConfirmation = () => {
               <p>frozen</p>
             </div>
 
-            <div className={styles.footer}>Created by Jas Nagra</div>
+            <div className={styles.footer}></div>
           </div>
         </div>
       )}

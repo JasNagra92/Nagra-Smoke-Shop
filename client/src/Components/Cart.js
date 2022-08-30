@@ -75,13 +75,15 @@ const Cart = () => {
               <tr>
                 <th>Name</th>
                 <th>Weight</th>
+                <th>Quantity</th>
                 <th>Price</th>
               </tr>
               {order.map((item) => {
                 return (
                   <tr key={item._id}>
                     <td>{item.name}</td>
-                    <td></td>
+                    <td>10Lbs</td>
+                    <td>{item.quantity}</td>
                     <td>${item.price}</td>
                   </tr>
                 );
@@ -109,7 +111,7 @@ const Cart = () => {
               <button onClick={handleSubmit} disabled= {disableBtn ? true : false}>checkout</button>
               <h4>
                 Total: $
-                {order.reduce((total, current) => total + current.price, 0)}
+                {order.reduce((total, current) => total + (current.price * current.quantity), 0)}
               </h4>
             </div>
           </div>

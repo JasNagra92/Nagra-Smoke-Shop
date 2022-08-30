@@ -1,37 +1,48 @@
-import React, { useState, useContext, useEffect} from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { CartContext } from "./CartContext";
-import axios from 'axios'
+import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import brisket from "../Images/brisket.jpg";
 import pork from "../Images/Pork-Butt.jpg";
-import rib from "../Images/PrimeRib.jpg";
 import styles from "../Styles/Menu.module.css";
-axios.defaults.baseURL = process.env.REACT_APP_baseURL || 'http://localhost:4000'
+axios.defaults.baseURL =
+  process.env.REACT_APP_baseURL || "http://localhost:4000";
 
 const Menu = () => {
   const [cart, setCart] = useContext(CartContext);
-  const [menuItems,setMenuItems] = useState([]);
-// use effect will retrieve items and their prices from the server to prevent price
-// manipulation and set them in state variable
-  useEffect(()=>{
+  const [menuItems, setMenuItems] = useState();
+  // use effect will retrieve items and their prices from the server to prevent price
+  // manipulation and set them in state variable
+  useEffect(() => {
     const getMenuItems = async () => {
-      let data = await axios.get('/api/menu')
-      setMenuItems(data.data.result)
-    }
-    getMenuItems()
-  }, [])
-// on click will set the menu items in cart but only their _ids,
-// only _ids will be sent to server then prices will be fetched from mongoDB
+      let data = await axios.get("/api/menu");
+      let menuArray = data.data.result
+      let menu = menuArray.map(menuItem => {
+        return {...menuItem, quantity: 0}
+      })
+      setMenuItems(menu);
+    };
+    getMenuItems();
+  }, []);
+  // on click will set the menu items in cart but only their _ids,
+  // only _ids will be sent to server then prices will be fetched from mongoDB
   const handleClick = (item) => {
-    setCart([...cart, item]);
+    if (cart.length === 0){
+    setCart([item]);
+    }
+    let foundProduct = cart.find(cartItem => cartItem._id === item._id)
+    if (foundProduct) {
+      foundProduct.quantity++
+    } else { setCart([...cart, item])}
   };
+
   return (
     <div className={styles.menuContainer}>
-      <div className="container">
-        <div className="row p-5">
-          <div className="d-flex justify-content-evenly">
-            <div>
+      {menuItems && (
+        <div>
+          <div className="container">
+            <div className="d-flex justify-content-evenly">
               <Card bg="dark" text="light" style={{ width: "18rem" }}>
                 <Card.Img variant="top" src={brisket} />
                 <Card.Body>
@@ -48,12 +59,7 @@ const Menu = () => {
                   <h5>Stock available: {menuItems[0].stock}</h5>
                 </Card.Body>
               </Card>
-            </div>
-          </div>
-        </div>
-        <div className="row p-5">
-          <div className="d-flex justify-content-evenly">
-            <div>
+
               <Card bg="dark" text="light" style={{ width: "18rem" }}>
                 <Card.Img variant="top" src={pork} />
                 <Card.Body>
@@ -71,27 +77,9 @@ const Menu = () => {
                 </Card.Body>
               </Card>
             </div>
-            <div>
-              <Card bg="dark" text="light" style={{ width: "18rem" }}>
-                <Card.Img variant="top" src={rib} />
-                <Card.Body>
-                  <Card.Title>6lb Prime Rib Roast</Card.Title>
-                  <Card.Text>
-                    6lb Prime Rib smoked for 12 hours with Applewood pellets
-                  </Card.Text>
-                  <Button
-                    variant="primary"
-                    onClick={() => handleClick(menuItems[2])}
-                  >
-                    Add to Cart
-                  </Button>
-                  <h5>Stock available: {menuItems[2].stock}</h5>
-                </Card.Body>
-              </Card>
-            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

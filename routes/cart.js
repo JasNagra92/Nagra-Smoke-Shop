@@ -12,6 +12,7 @@ router.post('/', async (req, res) => {
       let item = await db
         .collection('menuItems')
         .findOne({ _id: new ObjectID(id._id)})
+      item.quantity = id.quantity
       data.push(item);
     }
     res.status(200).json(data);
