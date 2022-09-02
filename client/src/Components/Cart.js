@@ -45,8 +45,13 @@ const Cart = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ payload: payload }),
     });
+    try{
     const target = await res.json();
+    console.log(target)
     window.location.href = target.url
+    } catch(err) {
+      console.log(err)
+    }
   };
 
   // on component mount, request to server with cart item _ids will fetch the prices from server

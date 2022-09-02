@@ -12,12 +12,16 @@ function App() {
     <BrowserRouter>
         <CartProvider>
           <DarkNavbar />
-          <Routes>
-            <Route path='/' element={<Home />}/>
-            <Route path='/menu' element={<Menu />} />
-            <Route path='/cart' element={<Cart />} />
-            <Route path='/success' element={<OrderConfirmation />} />
-          </Routes>
+          <div class="background">
+            <div class="overlay">
+              <Routes>
+                <Route path='/' element={<Home />}/>
+                <Route path='/menu' element={<Menu />} />
+                <Route path='/cart' element={<Cart />} />
+                <Route path='/success' element={<OrderConfirmation />} />
+              </Routes>
+            </div>
+          </div>
         </CartProvider>
     </BrowserRouter>
   );

@@ -1,6 +1,4 @@
 .homeContainer{
-    background-image: url('../Images/Home.jpg');
-    background-size: cover;
     display: flex;
     flex-direction: column;
     gap: 50px;
