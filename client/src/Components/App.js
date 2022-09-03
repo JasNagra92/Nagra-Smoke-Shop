@@ -11,9 +11,9 @@ function App() {
   return (
     <BrowserRouter>
         <CartProvider>
-          <DarkNavbar />
           <div class="background">
             <div class="overlay">
+            <DarkNavbar />
               <Routes>
                 <Route path='/' element={<Home />}/>
                 <Route path='/menu' element={<Menu />} />

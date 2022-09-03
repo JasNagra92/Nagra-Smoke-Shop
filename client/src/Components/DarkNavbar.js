@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import { NavLink } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import { BsFillCartFill } from 'react-icons/bs';
 import { CartContext } from './CartContext';
@@ -10,36 +8,56 @@ import styles from '../Styles/Nav.module.css';
 const DarkNavbar = () => {
   // import cart from context provider to update number of items
   const [cart, setCart] = useContext(CartContext);
+
   return (
-    <div>
-      <Navbar bg="dark" variant="dark">
-        <Container>
-          <Navbar.Brand href="#home">Nagra Smoke Shop</Navbar.Brand>
-          <Nav className="ms-auto">
-            <Nav.Link>
-              <Link to="/" className={styles.link}>
-                Home
-              </Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link to="/menu" className={styles.link}>
-                Menu
-              </Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link to="/contact" className={styles.link}>
-                Contact Me
-              </Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link to="/cart" className={styles.link}>
-                <BsFillCartFill size={30} />
-                <div className={styles.cart}>{cart.length}</div>
-              </Link>
-            </Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
+    <div class='container'>
+      <div className={styles.NavContainer}>
+        <div className={styles.Logo}>
+            <h5>NAGRA SMOKE HOUSE</h5>
+        </div>
+        <div className={styles.links}>
+          <div>
+            <NavLink
+            to="/"
+            className={ ({ isActive }) => isActive ? styles.activeClassName : undefined }
+            >
+              <p className={styles.link}>HOME</p>
+            </NavLink>
+          </div>
+          <div>
+            <p>RESERVATION</p>
+          </div>
+          <div>
+            <p>ABOUT US</p>
+          </div>
+          <div>
+            <p>GALLERY</p>
+          </div>
+          <div>
+            <p>SERVICES</p>
+          </div>
+          <div>
+            <NavLink
+             to="/menu"
+             className={ ({ isActive }) => isActive ? styles.activeClassName : undefined }
+             >
+             <p>MENU</p>
+            </NavLink>
+          </div>
+          <div>
+            <p>TEAM</p>
+          </div>
+          <div>
+            <p>BLOG</p>
+          </div>
+          <div>
+            <p>CONTACT</p>
+          </div>
+          <div>
+            <BsFillCartFill />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

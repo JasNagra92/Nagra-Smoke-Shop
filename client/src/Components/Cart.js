@@ -3,7 +3,6 @@ import { CartContext } from "./CartContext";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "../Styles/Cart.module.css";
-import "../Styles/cart.css";
 import axios from "axios";
 import CustomerInfoForm from "./CustomerInfoForm";
 import { addDays } from "date-fns";

@@ -1,54 +1,85 @@
-.cartContainer{
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.cartContainer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-ul{
-    list-style-type: none;
+ul {
+  list-style-type: none;
 }
-table{
-    background-color: lightgrey;
-    width:80%;
+table {
+  background-color: lightgrey;
+  width: 80%;
 }
 td,
-th{
-    width:500px;
-    border: 1px solid black
+th {
+  width: 500px;
+  border: 1px solid black;
 }
-th{
-    text-align: center;
+th {
+  text-align: center;
 }
-.cartDiv{
-    display: flex;
-    justify-content: center;
-    background-color: lightcyan;
-    height: 75vh;
-    width: 65vw;
-    border-radius: 15px;
+.cartDiv {
+  display: flex;
+  justify-content: center;
+  background-color: lightcyan;
+  height: 75vh;
+  width: 65vw;
+  border-radius: 15px;
 }
-.tableDiv{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap:10px
+.tableDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
-.heading{
-    text-align: center;
-    background-color: black;
-    color: white;
+.heading {
+  text-align: center;
+  background-color: black;
+  color: white;
 }
-h2{
-    margin-bottom: 0;
-    font-size: 3vw;
+h2 {
+  margin-bottom: 0;
+  font-size: 3vw;
 }
-.totalDiv{
-    display: flex;
-    gap: 10px;
+.totalDiv {
+  display: flex;
+  gap: 10px;
 }
-.customerForm{
-    display:flex;
-    flex-direction: column
+.customerForm {
+  display: flex;
+  flex-direction: column;
+}
+button {
+  background: #5469d4;
+  font-family: Arial, sans-serif;
+  color: #ffffff;
+  border-radius: 4px;
+  border: 0;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: block;
+  transition: all 0.2s ease;
+  box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
+  width: 100%;
+}
+
+button:hover {
+  filter: contrast(115%);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+@media only screen and (max-width: 600px) {
+  form {
+    width: 80vw;
+    min-width: initial;
+  }
 }

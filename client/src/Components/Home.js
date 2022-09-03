@@ -1,21 +1,38 @@
-import React from "react";
-import styles from '../Styles/Home.module.css'
+import React, { useState } from "react";
+import styles from "../Styles/Home.module.css";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Home = () => {
-    return (
+  const [isVisible, setIsVisible] = useState(true);
+  const handleClick = () => {
+    setIsVisible(!isVisible);
+  };
+
+  return (
+    <div class="container">
         <div className={styles.homeContainer}>
-            <div className={styles.quoteContainer}>
-                <p className={styles.quote}>Some of the best Smoked Brisket ive ever had</p>
-                <h4> - Evan Penner </h4>
+          <AnimatePresence>
+            <div className={styles.content}>
+                {isVisible && (
+                  <motion.div
+                    key={'test'}
+                    className={styles.title}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    <h1><span id={styles.nagra}>Nagra</span> Smoke House</h1>
+                  </motion.div>
+                )}
+                <motion.div
+                    key={'button'}
+                    className={styles.btn}>
+                        <button id={styles.howItWorks} onClick={handleClick}>How It Works</button>
+                </motion.div>
             </div>
-            <div className={styles.hoursContainer}>
-                <h5>Hours</h5>
-                <p>Monday - Friday</p>
-                <p>0900 - 0500</p>
-                <p>Saturday - Sunday</p>
-                <p>Closed</p>
-            </div>
+          </AnimatePresence>
         </div>
-    )
-}
-export default Home
+    </div>
+  );
+};
+export default Home;
