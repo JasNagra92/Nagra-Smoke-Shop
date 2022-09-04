@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
 import { BsFillCartFill } from 'react-icons/bs';
 import { CartContext } from './CartContext';
 import styles from '../Styles/Nav.module.css';

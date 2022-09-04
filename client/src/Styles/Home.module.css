@@ -2,17 +2,15 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  gap: 50px;
-  padding-top: 20px;
   align-items: center;
   height: 100vh;
 }
-.content{
-    grid-area: 2/1/3/2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.contentIntro {
+  grid-area: 2/1/3/2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .title {
   color: white;
@@ -23,8 +21,9 @@
   font-family: "Alex Brush";
   font-size: larger;
 }
-#howItWorks {
-  background-color: transparent ;
+#howItWorks,
+.stepOneBtn {
+  background-color: transparent;
   font-family: Arial, sans-serif;
   color: #ffffff;
   border-radius: 4px;
@@ -37,12 +36,85 @@
   transition: all 0.2s ease;
   box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
 }
-#howItWorks:hover {
+#howItWorks:hover,
+.stepOneBtn:hover {
   background-color: black;
   scale: 1.2;
 }
-
+.stepOneBtn {
+  width: 50%;
+}
 button:disabled {
   opacity: 0.5;
   cursor: default;
+}
+.stepContainer {
+  grid-area: 1/1/2/3;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+}
+.stepOneDescription {
+  grid-area: 2/1/3/3;
+}
+h2 {
+  color: white;
+  text-align: center;
+}
+img {
+  min-width: 300px;
+  max-width: 350px;
+  max-height: 100%;
+}
+.pictures {
+  display: flex;
+  gap: 20px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+.imgContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid white;
+}
+.aboveImg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.or {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.or > p {
+  font-size: 1.5rem;
+}
+.stepOneText {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+  align-items: center;
+}
+.stepTwoText {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+  align-items: center;
+}
+.names {
+  display: flex;
+  justify-content: space-evenly;
+}
+.namesTwo {
+  display: flex;
+  justify-content: space-between;
 }
