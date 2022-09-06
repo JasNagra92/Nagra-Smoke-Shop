@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
+import axios from 'axios'
 import styles from "../Styles/OrderConfirmation.module.css";
+import { format } from 'date-fns'
+
 const OrderConfirmation = () => {
   const [confirmedOrder, setConfirmedOrder] = useState();
   // this page will be rendered on redirect after successfull checkout session
@@ -12,15 +15,14 @@ const OrderConfirmation = () => {
   useEffect(() => {
     const setOrder = async () => {
       try {
-        const response = await fetch("/checkout-session?id=" + id);
-        const data = await response.json();
-        setConfirmedOrder(data);
+        const response = await axios.get("/checkout-session?id=" + id);
+        setConfirmedOrder(response.data)
       } catch (error) {
         console.log(error);
       }
     };
     setOrder();
-  });
+  }, []);
 
   return (
     <div className={styles.mainContainer}>
@@ -56,7 +58,7 @@ const OrderConfirmation = () => {
             </div>
             <div className={styles.pdate}>
               <h5>Pick up Date</h5>
-              <p>10-10-2022</p>
+              <p>{format(new Date(`${confirmedOrder.pickupDate}`), 'MM/dd/yyyy H:mm')}</p>
             </div>
             <div className={styles.delivery}>
               <h5>Delivery Option</h5>

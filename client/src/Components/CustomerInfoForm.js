@@ -1,7 +1,9 @@
-import styles from '../Styles/form.module.css';
 const CustomerInfoForm = ({ customerInfo, handleInput }) => {
   return (
-      <div>
+      <div style={{
+        display: 'flex',
+        gap: '10px'
+      }}>
         <label>Name:</label>
         <input
           type="text"

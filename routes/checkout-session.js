@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose')
+const Orders = require('../models/orderModel')
 
 router.get('/', async (req, res) => {
-    const db = mongoose.connection.db
-    const doc = await db.collection('orders').findOne({checkoutSessionId: req.query.id })
+    const doc = await Orders.findOne({checkoutSessionId: req.query.id })
     res.json(doc)
 })
 

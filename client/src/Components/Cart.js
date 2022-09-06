@@ -33,7 +33,7 @@ const Cart = () => {
   };
   // disable checkout button until all fields are flled in
   useEffect(() => {
-    if (customerInfo && startDate) {
+    if (customerInfo.email && customerInfo.name && startDate) {
       setDisableBtn(false);
     } else {
       setDisableBtn(true);
@@ -43,13 +43,8 @@ const Cart = () => {
   // send cart information along with customer info to server to create stripe checkout session
   // this will redirect the user to the url sent in the response from the server
   const handleSubmit = async () => {
-    const res = await fetch("/create-checkout-session", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ payload: payload }),
-    });
-    const data = await res.json();
-    console.log(data);
+    const response = await axios.post("/create-checkout-session", { payload });
+    const data = response.data;
     if (data.error) {
       alert(data.error);
     } else {
@@ -127,8 +122,19 @@ const Cart = () => {
                 </tr>
               ))}
             </table>
+            <div className={styles.totalDiv}>
+              <button onClick={handleSubmit} disabled={disableBtn}>
+                checkout
+              </button>
+              <h4 className={styles.total}>
+                Total: $
+                {order.reduce(
+                  (total, current) => total + current.price * current.quantity,
+                  0
+                )}
+              </h4>
+            </div>
             <div className={styles.customerForm}>
-              <div>
                 <CustomerInfoForm
                   handleInput={handleInput}
                   customerInfo={customerInfo}
@@ -144,19 +150,6 @@ const Cart = () => {
                   dateFormat="MMMM,d,yyyy h:mm aa"
                   placeholderText="Pick a day for pickup"
                 />
-              </div>
-            </div>
-            <div className={styles.totalDiv}>
-              <button onClick={handleSubmit} disabled={disableBtn}>
-                checkout
-              </button>
-              <h4>
-                Total: $
-                {order.reduce(
-                  (total, current) => total + current.price * current.quantity,
-                  0
-                )}
-              </h4>
             </div>
           </div>
         </div>

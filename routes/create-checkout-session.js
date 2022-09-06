@@ -4,7 +4,6 @@ const stripe = require("stripe")(
 );
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
 const MenuItems = require("../models/menuItemModel");
 
 const YOUR_DOMAIN = "http://localhost:4000";

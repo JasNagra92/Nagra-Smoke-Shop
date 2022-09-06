@@ -1,16 +1,20 @@
 .cartContainer {
   height: 100vh;
   display: flex;
+  padding-top: 20px;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 ul {
   list-style-type: none;
 }
 table {
-  background-color: lightgrey;
+  background-color: rgb(234, 234, 234);
   width: 80%;
+}
+table, th, td {
+  border: 5px solid white;
+  border-collapse: collapse;
 }
 td,
 th {
@@ -23,15 +27,13 @@ th {
 .cartDiv {
   display: flex;
   justify-content: center;
-  background-color: lightcyan;
-  height: 75vh;
+  background-color: transparent;
   width: 65vw;
   border-radius: 15px;
 }
 .tableDiv {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: 10px;
 }
@@ -50,7 +52,8 @@ h2 {
 }
 .customerForm {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 10px
 }
 button {
   background: #5469d4;
@@ -76,10 +79,6 @@ button:disabled {
   opacity: 0.5;
   cursor: default;
 }
-
-@media only screen and (max-width: 600px) {
-  form {
-    width: 80vw;
-    min-width: initial;
-  }
+label, .total{
+  color: white
 }

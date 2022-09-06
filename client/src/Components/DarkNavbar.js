@@ -65,7 +65,8 @@ const DarkNavbar = () => {
                 isActive ? styles.activeClassName : undefined
               }
             >
-              <BsFillCartFill />
+              <BsFillCartFill size={'30px'} />
+              <div className={styles.cart}>{cart.length}</div>
             </NavLink>
           </div>
         </div>
