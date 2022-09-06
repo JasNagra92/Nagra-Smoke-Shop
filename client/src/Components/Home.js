@@ -43,7 +43,10 @@ const Home = () => {
                   </h1>
                 </div>
                 <div className={styles.btn}>
-                  <button id={styles.howItWorks} onClick={handleClick("one")}>
+                  <button
+                    id={styles.howItWorks}
+                    onClick={() => handleClick("one")}
+                  >
                     How It Works
                   </button>
                 </div>
@@ -93,7 +96,7 @@ const Home = () => {
                 </p>
                 <button
                   className={styles.stepOneBtn}
-                  onClick={handleClick("two")}
+                  onClick={() => handleClick("two")}
                 >
                   Step Two
                 </button>
@@ -154,7 +157,7 @@ const Home = () => {
                 </p>
                 <button
                   className={styles.stepOneBtn}
-                  onClick={handleClick("menu")}
+                  onClick={() => handleClick("menu")}
                 >
                   Place order
                 </button>

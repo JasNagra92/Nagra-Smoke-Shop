@@ -36,13 +36,16 @@ const Menu = () => {
 
     let foundProduct = cart.find((cartItem) => cartItem._id === item._id);
     if (foundProduct) {
-      setCart(cart.map((cartItem) => 
-        cartItem._id === item._id ? {
-          ...cartItem,
-          quantity: cartItem.quantity += 1
-        } :
-        cartItem
-      ))
+      setCart(
+        cart.map((cartItem) =>
+          cartItem._id === item._id
+            ? {
+                ...cartItem,
+                quantity: (cartItem.quantity += 1),
+              }
+            : cartItem
+        )
+      );
     } else {
       setCart([...cart, item]);
     }

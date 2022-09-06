@@ -8,11 +8,11 @@ router.post('/', async (req, res) => {
   const cart = req.body.cart;
   let data = [];
   try {
-    for (const id of cart) {
+    for (const obj of cart) {
       let item = await db
         .collection('menuItems')
-        .findOne({ _id: new ObjectID(id._id)})
-      item.quantity = id.quantity
+        .findOne({ _id: new ObjectID(obj._id)})
+      item.quantity = obj.quantity
       data.push(item);
     }
     res.status(200).json(data);

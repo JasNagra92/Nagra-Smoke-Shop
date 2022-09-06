@@ -5,6 +5,7 @@ const stripe = require("stripe")(
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
+const MenuItems = require("../models/menuItemModel");
 
 const YOUR_DOMAIN = "http://localhost:4000";
 
@@ -12,50 +13,50 @@ router.post("/", async (req, res) => {
   const { payload } = req.body;
   let query = [];
   const db = mongoose.connection.db;
+  let stockError = false;
   // create a query containing price_id's of each item that was sent from the client
   for (const item of payload.items) {
     query.push(item.price_id);
   }
-  
-  db.collection("menuItems")
-    .find({ price_id: { $in: query } })
-    .toArray((err, docs) => {
-      if (err) {
-        console.log(err);
-      }
-      // compare each items quantity that was sent from the server with that items
-      // stock value that is fetched from the database, if the quantity ordered
-      // is higher than the availble stock, throws an error and does not proceed
-      // with checkout
-      for (const item of payload.items) {
-        const docToCheck = docs.find((doc) => doc.price_id === item.price_id);
-        if (item.quantity > docToCheck.stock) {
-          res.json({ error: "not enough stock" });
-        }
-      }
-    });
-
-  let line_items = [];
+  // check menu items stock values in database against the quantity sent from client
+  // and if any of the quantities is greater than the available stock set stockError
+  // variable to true
+  let inventoryItems = await MenuItems.find({ price_id: { $in: query } });
   for (const item of payload.items) {
-    line_items.push({
-      price: item.price_id,
-      quantity: item.quantity,
-    });
+    const inventoryItem = inventoryItems.find(
+      (item) => item.price_id === item.price_id
+    );
+    if (item.quantity > inventoryItem.stock) {
+      stockError = true;
+    }
   }
-  const session = await stripe.checkout.sessions.create({
-    line_items: line_items,
-    customer_creation: "always",
-    customer_email: payload.email,
-    metadata: {
-      pickupDate: payload.pickupDate,
-    },
-    mode: "payment",
-    success_url: `${YOUR_DOMAIN}/success?id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${YOUR_DOMAIN}?canceled=true`,
-    automatic_tax: { enabled: false },
-  });
 
-  res.json({ url: session.url });
+  // send error as json object if previous check had found a stock error
+  // otherwise create checkout session and send back the URL for redirect
+  if (stockError) {
+    res.json({ error: "not enough stock" });
+  } else {
+    let line_items = [];
+    for (const item of payload.items) {
+      line_items.push({
+        price: item.price_id,
+        quantity: item.quantity,
+      });
+    }
+    const session = await stripe.checkout.sessions.create({
+      line_items: line_items,
+      customer_creation: "always",
+      customer_email: payload.email,
+      metadata: {
+        pickupDate: payload.pickupDate,
+      },
+      mode: "payment",
+      success_url: `${YOUR_DOMAIN}/success?id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${YOUR_DOMAIN}?canceled=true`,
+      automatic_tax: { enabled: false },
+    });
+    return res.json({ url: session.url });
+  }
 });
 
 module.exports = router;

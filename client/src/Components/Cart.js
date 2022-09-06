@@ -13,12 +13,12 @@ axios.defaults.baseURL =
 
 const Cart = () => {
   const [cart] = useContext(CartContext);
-  const [disableBtn, setDisableBtn] = useState(true)
+  const [disableBtn, setDisableBtn] = useState(true);
   const [order, setOrder] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [customerInfo, setCustomerInfo] = useState({
-    name: '',
-    email: ''
+    name: "",
+    email: "",
   });
   // payload will be used in fetch request to send order information to server
   const payload = { ...customerInfo, items: order, pickupDate: startDate };
@@ -30,11 +30,13 @@ const Cart = () => {
     });
   };
   // disable checkout button until all fields are flled in
-  useEffect(()=>{
+  useEffect(() => {
     if (customerInfo && startDate) {
-      setDisableBtn(false)
-    } else {setDisableBtn(true)}
-  }, [customerInfo, startDate])
+      setDisableBtn(false);
+    } else {
+      setDisableBtn(true);
+    }
+  }, [customerInfo, startDate]);
 
   // send cart information along with customer info to server to create stripe checkout session
   // this will redirect the user to the url sent in the response from the server
@@ -44,12 +46,13 @@ const Cart = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ payload: payload }),
     });
-    try{
-    const target = await res.json();
-    console.log(target)
-    window.location.href = target.url
-    } catch(err) {
-      console.log(err)
+    const data = await res.json();
+    console.log(data)
+    if (data.error) {
+      alert(data.error);
+    } else {
+      const target = data.url
+      window.location.href = target;
     }
   };
 
@@ -82,16 +85,14 @@ const Cart = () => {
                 <th>Quantity</th>
                 <th>Price</th>
               </tr>
-              {order.map((item) => {
-                return (
-                  <tr key={item._id}>
-                    <td>{item.name}</td>
-                    <td>10Lbs</td>
-                    <td>{item.quantity}</td>
-                    <td>${item.price}</td>
-                  </tr>
-                );
-              })}
+              {order.map((item) => (
+                <tr key={item._id}>
+                  <td>{item.name}</td>
+                  <td>10Lbs</td>
+                  <td>{item.quantity}</td>
+                  <td>${item.price}</td>
+                </tr>
+              ))}
             </table>
             <div className={styles.customerForm}>
               <div>
@@ -112,10 +113,15 @@ const Cart = () => {
               </div>
             </div>
             <div className={styles.totalDiv}>
-              <button onClick={handleSubmit} disabled= {disableBtn ? true : false}>checkout</button>
+              <button onClick={handleSubmit} disabled={disableBtn}>
+                checkout
+              </button>
               <h4>
                 Total: $
-                {order.reduce((total, current) => total + (current.price * current.quantity), 0)}
+                {order.reduce(
+                  (total, current) => total + current.price * current.quantity,
+                  0
+                )}
               </h4>
             </div>
           </div>
