@@ -3,9 +3,9 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const ObjectID = require('mongodb').ObjectID;
 
-router.post('/', async (req, res) => {
+router.get('/', async (req, res) => {
   const db = mongoose.connection.db;
-  const cart = req.body.cart;
+  const cart = req.query.cart;
   let data = [];
   try {
     for (const obj of cart) {

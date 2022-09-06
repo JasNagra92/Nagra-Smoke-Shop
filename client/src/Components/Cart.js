@@ -6,6 +6,7 @@ import styles from "../Styles/Cart.module.css";
 import axios from "axios";
 import CustomerInfoForm from "./CustomerInfoForm";
 import { addDays } from "date-fns";
+const qs = require("qs");
 
 // react_app_baseURL is env variable provided by heroku on hosting
 axios.defaults.baseURL =
@@ -62,7 +63,12 @@ const Cart = () => {
   useEffect(() => {
     const showOrder = async () => {
       try {
-        const response = await axios.post("/api/cart", { cart });
+        const response = await axios.get("/api/cart", {
+          params: { cart: cart },
+          paramsSerializer: (params) => {
+            return qs.stringify(params);
+          },
+        });
         setOrder(response.data);
       } catch (error) {
         console.log(error);
@@ -83,7 +89,7 @@ const Cart = () => {
     return excludedDates;
   };
 
-  // on component mount get requeset recieves existing orders 
+  // on component mount get requeset recieves existing orders
   // pick up dates and stores them in disabled dates state array
   // to be given to react date picker to disable those dates
   // to prevent 2 orders being picked up on the same day, smoker
