@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { CartContext } from "./CartContext";
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -18,10 +18,10 @@ const Menu = () => {
   useEffect(() => {
     const getMenuItems = async () => {
       let data = await axios.get("/api/menu");
-      let menuArray = data.data.result
-      let menu = menuArray.map(menuItem => {
-        return {...menuItem, quantity: 0}
-      })
+      let menuArray = data.data.result;
+      let menu = menuArray.map((menuItem) => {
+        return { ...menuItem, quantity: 0 };
+      });
       setMenuItems(menu);
     };
     getMenuItems();
@@ -29,21 +29,24 @@ const Menu = () => {
   // on click will set the menu items in cart but only their _ids,
   // only _ids will be sent to server then prices will be fetched from mongoDB
   const handleClick = (item) => {
-    if (cart.length === 0){
-    setCart([item]);
+    if (cart.length === 0) {
+      setCart([item]);
     }
-    let foundProduct = cart.find(cartItem => cartItem._id === item._id)
+    let foundProduct = cart.find((cartItem) => cartItem._id === item._id);
     if (foundProduct) {
-      foundProduct.quantity++
-    } else { setCart([...cart, item])}
+      foundProduct.quantity++;
+    } else {
+      setCart([...cart, item]);
+    }
   };
 
   return (
     <motion.div
-     initial={{opacity: 0}}
-     animate={{opacity: 1}}
-     exit={{opacity: 0}}
-     className={styles.menuContainer}>
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className={styles.menuContainer}
+    >
       {menuItems && (
         <div>
           <div className="container">

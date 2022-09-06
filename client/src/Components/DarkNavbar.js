@@ -1,24 +1,28 @@
-import React, { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
-import { BsFillCartFill } from 'react-icons/bs';
-import { CartContext } from './CartContext';
-import styles from '../Styles/Nav.module.css';
+import React, { useContext } from "react";
+import { NavLink } from "react-router-dom";
+import { BsFillCartFill } from "react-icons/bs";
+import { CartContext } from "./CartContext";
+import styles from "../Styles/Nav.module.css";
 
 const DarkNavbar = () => {
   // import cart from context provider to update number of items
   const [cart, setCart] = useContext(CartContext);
 
   return (
-    <div class='container'>
+    <div class="container">
       <div className={styles.NavContainer}>
         <div className={styles.Logo}>
-            <h5>NAGRA SMOKE HOUSE</h5>
+          <h5>
+            <span id={styles.nagra}>nagra</span> SMOKE HOUSE
+          </h5>
         </div>
         <div className={styles.links}>
           <div>
             <NavLink
-            to="/"
-            className={ ({ isActive }) => isActive ? styles.activeClassName : undefined }
+              to="/"
+              className={({ isActive }) =>
+                isActive ? styles.activeClassName : undefined
+              }
             >
               <p className={styles.link}>HOME</p>
             </NavLink>
@@ -37,10 +41,12 @@ const DarkNavbar = () => {
           </div>
           <div>
             <NavLink
-             to="/menu"
-             className={ ({ isActive }) => isActive ? styles.activeClassName : undefined }
-             >
-             <p>MENU</p>
+              to="/menu"
+              className={({ isActive }) =>
+                isActive ? styles.activeClassName : undefined
+              }
+            >
+              <p>MENU</p>
             </NavLink>
           </div>
           <div>
@@ -53,7 +59,14 @@ const DarkNavbar = () => {
             <p>CONTACT</p>
           </div>
           <div>
-            <BsFillCartFill />
+            <NavLink
+              to="/cart"
+              className={({ isActive }) =>
+                isActive ? styles.activeClassName : undefined
+              }
+            >
+              <BsFillCartFill />
+            </NavLink>
           </div>
         </div>
       </div>

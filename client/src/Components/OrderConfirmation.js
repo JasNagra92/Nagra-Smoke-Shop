@@ -2,25 +2,24 @@ import { useEffect, useState } from "react";
 import styles from "../Styles/OrderConfirmation.module.css";
 const OrderConfirmation = () => {
   const [confirmedOrder, setConfirmedOrder] = useState();
-// this page will be rendered on redirect after successfull checkout session
-// server side route appends the checkout session ID to the URL upon
-// successfull redirect, that id is then used to fetch the corresponding
-// order from mongoDB and then display it on the thank you page
+  // this page will be rendered on redirect after successfull checkout session
+  // server side route appends the checkout session ID to the URL upon
+  // successfull redirect, that id is then used to fetch the corresponding
+  // order from mongoDB and then display it on the thank you page
   const queryParams = new URLSearchParams(window.location.search);
   const id = queryParams.get("id");
 
   useEffect(() => {
-    try {
-      fetch("/checkout-session?id=" + id)
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (data) {
-          setConfirmedOrder(data);
-        });
-    } catch (error) {
-      console.log(error);
-    }
+    const setOrder = async () => {
+      try {
+        const response = await fetch("/checkout-session?id=" + id);
+        const data = await response.json();
+        setConfirmedOrder(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    setOrder();
   });
 
   return (
