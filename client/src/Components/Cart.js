@@ -16,6 +16,7 @@ const Cart = () => {
   const [disableBtn, setDisableBtn] = useState(true);
   const [order, setOrder] = useState([]);
   const [startDate, setStartDate] = useState(null);
+  const [disabledDates, setDisabledDates] = useState();
   const [customerInfo, setCustomerInfo] = useState({
     name: "",
     email: "",
@@ -47,11 +48,11 @@ const Cart = () => {
       body: JSON.stringify({ payload: payload }),
     });
     const data = await res.json();
-    console.log(data)
+    console.log(data);
     if (data.error) {
       alert(data.error);
     } else {
-      const target = data.url
+      const target = data.url;
       window.location.href = target;
     }
   };
@@ -68,6 +69,32 @@ const Cart = () => {
       }
     };
     showOrder();
+  }, []);
+
+  // function returns an array of Date objects made from list of
+  // dates recieved from the server through a Get request that
+  // queries the database of existing orders and sends back
+  // existing pick up dates
+  const formattedDates = (array) => {
+    let excludedDates = [];
+    for (const date of array) {
+      excludedDates.push(new Date(date));
+    }
+    return excludedDates;
+  };
+
+  // on component mount get requeset recieves existing orders 
+  // pick up dates and stores them in disabled dates state array
+  // to be given to react date picker to disable those dates
+  // to prevent 2 orders being picked up on the same day, smoker
+  // is too small to time multiple pick ups on same day
+  useEffect(() => {
+    const getDates = async () => {
+      const response = await axios.get("/getExcludedDates");
+
+      setDisabledDates(formattedDates(response.data));
+    };
+    getDates();
   }, []);
 
   return (
@@ -105,9 +132,10 @@ const Cart = () => {
                   selected={startDate}
                   onChange={(date) => setStartDate(date)}
                   minDate={addDays(new Date(), 3)}
+                  excludeDates={disabledDates}
                   showTimeSelect
                   timeFormat="HH:mm"
-                  dateFormat="MMMM d, yyyy h:mm aa"
+                  dateFormat="MMMM,d,yyyy h:mm aa"
                   placeholderText="Pick a day for pickup"
                 />
               </div>

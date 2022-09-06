@@ -15,6 +15,7 @@ const orderRoutes = require('./routes/order');
 const testRoute = require('./routes/create-checkout-session')
 const checkoutSessionRoute = require('./routes/checkout-session')
 const webHookRoute = require('./routes/webHookRoute')
+const excludedDates = require('./routes/getExcludedDates')
 
 app.use(cors());
 app.use((req, res, next) => {
@@ -31,8 +32,9 @@ app.use('/api/menu', menuRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/order', orderRoutes);
 app.use('/create-checkout-session', testRoute);
-app.use('/webhook', webHookRoute)
-app.use('/checkout-session', checkoutSessionRoute)
+app.use('/webhook', webHookRoute);
+app.use('/checkout-session', checkoutSessionRoute);
+app.use('/getExcludedDates', excludedDates)
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
