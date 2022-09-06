@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { CartContext } from "./CartContext";
 import { motion } from "framer-motion";
+import { BallTriangle } from "react-loader-spinner";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -17,10 +18,10 @@ const Menu = () => {
   // manipulation and set them in state variable
   useEffect(() => {
     const getMenuItems = async () => {
-      let data = await axios.get("/api/menu");
-      let menuArray = data.data.result;
-      let menu = menuArray.map((menuItem) => {
-        return { ...menuItem, quantity: 0 };
+      const data = await axios.get("/api/menu");
+      const menuArray = data.data.result;
+      const menu = menuArray.map((menuItem) => {
+        return { ...menuItem, quantity: 1 };
       });
       setMenuItems(menu);
     };
@@ -32,9 +33,11 @@ const Menu = () => {
     if (cart.length === 0) {
       setCart([item]);
     }
+
     let foundProduct = cart.find((cartItem) => cartItem._id === item._id);
     if (foundProduct) {
       foundProduct.quantity++;
+      setCart([...cart]);
     } else {
       setCart([...cart, item]);
     }
@@ -47,7 +50,7 @@ const Menu = () => {
       exit={{ opacity: 0 }}
       className={styles.menuContainer}
     >
-      {menuItems && (
+      {menuItems ? (
         <div>
           <div className="container">
             <div className="d-flex justify-content-evenly">
@@ -87,6 +90,17 @@ const Menu = () => {
             </div>
           </div>
         </div>
+      ) : (
+        <BallTriangle
+          height={100}
+          width={100}
+          radius={5}
+          color="#4fa94d"
+          ariaLabel="ball-triangle-loading"
+          wrapperClass={{}}
+          wrapperStyle=""
+          visible={true}
+        />
       )}
     </motion.div>
   );

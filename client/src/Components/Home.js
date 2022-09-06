@@ -8,21 +8,15 @@ import frozen from "../Images/brisketsealed.jpg";
 import fresh from "../Images/freshsmoked.jpg";
 
 const Home = () => {
-  const [intro, setIntro] = useState(true);
-  const [stepOne, setStepOne] = useState(false);
-  const [stepTwo, setStepTwo] = useState(false);
+  const [step, setStep] = useState("intro");
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    setIntro(!intro);
-    setStepOne(true);
-  };
-  const handleClickTwo = () => {
-    setStepOne(!stepOne);
-    setStepTwo(true);
-  };
-  const handleClickThree = () => {
-    navigate("/menu");
+  const handleClick = (step) => {
+    if (step === "menu") {
+      navigate("/menu");
+    } else {
+      setStep(step);
+    }
   };
 
   return (
@@ -34,7 +28,7 @@ const Home = () => {
     >
       <div className={styles.homeContainer}>
         <AnimatePresence mode="wait">
-          {intro && (
+          {step === "intro" && (
             <motion.div
               key={"introTitle"}
               className={styles.contentIntro}
@@ -49,14 +43,14 @@ const Home = () => {
                   </h1>
                 </div>
                 <div className={styles.btn}>
-                  <button id={styles.howItWorks} onClick={handleClick}>
+                  <button id={styles.howItWorks} onClick={handleClick("one")}>
                     How It Works
                   </button>
                 </div>
               </div>
             </motion.div>
           )}
-          {stepOne && (
+          {step === "one" && (
             <motion.div
               key={"stepOne"}
               initial={{ opacity: 0 }}
@@ -84,7 +78,7 @@ const Home = () => {
               </div>
             </motion.div>
           )}
-          {stepOne && (
+          {step === "one" && (
             <motion.div
               key={"stepOneDescription"}
               initial={{ opacity: 0 }}
@@ -97,13 +91,16 @@ const Home = () => {
                   Choose between either 10lbs of 12 hour applewood smoked Pork
                   Shoulder or 12 hour smoked Beef Brisket
                 </p>
-                <button className={styles.stepOneBtn} onClick={handleClickTwo}>
+                <button
+                  className={styles.stepOneBtn}
+                  onClick={handleClick("two")}
+                >
                   Step Two
                 </button>
               </div>
             </motion.div>
           )}
-          {stepTwo && (
+          {step === "two" && (
             <motion.div
               key={"stepTwoDescription"}
               initial={{ opacity: 0 }}
@@ -131,7 +128,7 @@ const Home = () => {
               </div>
             </motion.div>
           )}
-          {stepTwo && (
+          {step === "two" && (
             <motion.div
               key={"stepTwoDescription"}
               initial={{ opacity: 0 }}
@@ -157,7 +154,7 @@ const Home = () => {
                 </p>
                 <button
                   className={styles.stepOneBtn}
-                  onClick={handleClickThree}
+                  onClick={handleClick("menu")}
                 >
                   Place order
                 </button>
