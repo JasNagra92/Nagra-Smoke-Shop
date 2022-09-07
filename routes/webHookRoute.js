@@ -71,6 +71,7 @@ router.post("/", express.raw({ type: "application/json" }), (req, res) => {
           pickupDate: pickupDate.pickupDate,
           orderNumber: orderNumber,
           items: lineItems.data,
+          OrderDate: Date.now()
         });
         try {
           order.save();

@@ -45,7 +45,7 @@ const OrderConfirmation = () => {
             </div>
             <div className={styles.date}>
               <h5>Order Date</h5>
-              <p>10-10-2022 10:30</p>
+              <p>{format(new Date(`${confirmedOrder.OrderDate}`), 'MM/dd/yyyy H:mm')}</p>
             </div>
             <div className={styles.method}>
               <h5>Payment Method</h5>
