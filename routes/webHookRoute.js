@@ -12,7 +12,6 @@ const endpointSecret =
 
 router.post("/", express.raw({ type: "application/json" }), (req, res) => {
   const payload = req.body;
-  console.log("got payload:" + payload);
 
   const sig = req.headers["stripe-signature"];
 
@@ -25,7 +24,8 @@ router.post("/", express.raw({ type: "application/json" }), (req, res) => {
   }
 
   if (event.type === "checkout.session.completed") {
-    const { id } = event.data.object;
+    console.log(event.data.object)
+    const { id, amount_total } = event.data.object;
     const { name, email } = event.data.object.customer_details;
     const pickupDate = event.data.object.metadata;
     const db = mongoose.connection.db;
@@ -71,10 +71,14 @@ router.post("/", express.raw({ type: "application/json" }), (req, res) => {
           pickupDate: pickupDate.pickupDate,
           orderNumber: orderNumber,
           items: lineItems.data,
+          amount_total: amount_total,
           OrderDate: Date.now()
         });
         try {
           order.save();
+          // after creating order, update the menu item document
+          // that corresponds to the items that were ordered
+          // and then reduce the stock by the quantity ordered
           for (const item of lineItems.data) {
             const doc = await MenuItem.findOne({ name: item.description });
             console.log(doc);

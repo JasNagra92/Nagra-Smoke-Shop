@@ -41,7 +41,7 @@ const OrderConfirmation = () => {
 
             <div className={styles.total}>
               <h5>Order Total</h5>
-              <p>$ 100.00</p>
+              <p>{(confirmedOrder.amount_total/100).toLocaleString('en-US', {style:'currency', currency:'CAD'})}</p>
             </div>
             <div className={styles.date}>
               <h5>Order Date</h5>
@@ -54,7 +54,7 @@ const OrderConfirmation = () => {
 
             <div className={styles.email}>
               <h5>Email</h5>
-              <p>test@hotmail.com</p>
+              <p>{confirmedOrder.email}</p>
             </div>
             <div className={styles.pdate}>
               <h5>Pick up Date</h5>

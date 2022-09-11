@@ -6,6 +6,7 @@ const OrderSchema = new Schema({
   email: {type: String, required: true},
   checkoutSessionId: {type: String, required: true},
   items: { type: Array, required: true },
+  amount_total: {type: Number, required: true},
   orderNumber: {type: Number, required: true},
   paid: { type: Boolean, required: true },
   pickupDate: { type: String, required: true },

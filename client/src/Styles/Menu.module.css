@@ -3,9 +3,8 @@
     height: 100vh
 }
 .card-img-top {
-    width: 100%;
+    width: 50%;
     height: 15vw;
-    object-fit: cover;
 }
 h5{
     padding-top: 10px;

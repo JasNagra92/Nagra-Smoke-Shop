@@ -94,7 +94,8 @@ img {
 .or > p {
   font-size: 1.5rem;
 }
-.stepOneText {
+.stepOneTextContainer,
+.stepTwoTextContainer {
   display: flex;
   flex-direction: column;
   color: white;
@@ -102,13 +103,8 @@ img {
   text-align: center;
   align-items: center;
 }
-.stepTwoText {
-  display: flex;
-  flex-direction: column;
-  color: white;
-  font-size: 1rem;
-  text-align: center;
-  align-items: center;
+.stepText{
+  margin-top: 0;
 }
 .names {
   display: flex;

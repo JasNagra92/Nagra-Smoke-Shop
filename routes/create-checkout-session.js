@@ -10,6 +10,7 @@ const YOUR_DOMAIN = "http://localhost:4000";
 
 router.post("/", async (req, res) => {
   const { payload } = req.body;
+  console.log(payload)
   let query = [];
   let stockError = false;
   // create a query containing price_id's of each item that was sent from the client

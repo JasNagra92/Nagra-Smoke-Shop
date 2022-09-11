@@ -21,7 +21,7 @@ const Menu = () => {
       const data = await axios.get("/api/menu");
       const menuArray = data.data.result;
       const menu = menuArray.map((menuItem) => {
-        return { ...menuItem, quantity: 1 };
+        return { ...menuItem, quantity: 1};
       });
       setMenuItems(menu);
     };
@@ -62,7 +62,7 @@ const Menu = () => {
         <div>
           <div className="container">
             <div className="d-flex justify-content-evenly">
-              <Card bg="dark" text="light" style={{ width: "18rem" }}>
+              <Card bg="dark" text="light" style={{ width: "20rem" }}>
                 <Card.Img variant="top" src={brisket} />
                 <Card.Body>
                   <Card.Title>10 lb Smoked Brisket</Card.Title>
@@ -79,7 +79,7 @@ const Menu = () => {
                 </Card.Body>
               </Card>
 
-              <Card bg="dark" text="light" style={{ width: "18rem" }}>
+              <Card bg="dark" text="light" style={{ width: "20rem" }}>
                 <Card.Img variant="top" src={pork} />
                 <Card.Body>
                   <Card.Title>10 lb Pulled Pork</Card.Title>

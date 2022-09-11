@@ -11,7 +11,6 @@ const app = express();
 const mongoose = require('mongoose');
 const menuRoutes = require('./routes/menu');
 const cartRoutes = require('./routes/cart');
-const orderRoutes = require('./routes/order');
 const testRoute = require('./routes/create-checkout-session')
 const checkoutSessionRoute = require('./routes/checkout-session')
 const webHookRoute = require('./routes/webHookRoute')
@@ -30,7 +29,6 @@ app.use(express.static(path.resolve(__dirname, './client/build')));
 
 app.use('/api/menu', menuRoutes);
 app.use('/api/cart', cartRoutes);
-app.use('/api/order', orderRoutes);
 app.use('/create-checkout-session', testRoute);
 app.use('/webhook', webHookRoute);
 app.use('/checkout-session', checkoutSessionRoute);

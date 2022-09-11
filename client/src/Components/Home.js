@@ -89,8 +89,8 @@ const Home = () => {
               exit={{ opacity: 0 }}
               className={styles.stepOneDescription}
             >
-              <div className={styles.stepOneText}>
-                <p>
+              <div className={styles.stepOneTextContainer}>
+                <p className={styles.stepText}>
                   Choose between either 10lbs of 12 hour applewood smoked Pork
                   Shoulder or 12 hour smoked Beef Brisket
                 </p>
@@ -119,15 +119,6 @@ const Home = () => {
                     <img src={frozen} alt="vacuum sealed brisket" />
                   </div>
                 </div>
-                <div className={styles.or}>
-                  <p>Or</p>
-                </div>
-                <div className={styles.aboveImg}>
-                  <h5>Fresh off the Smoker</h5>
-                  <div className={styles.imgContainer}>
-                    <img src={fresh} alt="pork butt being wrapped" />
-                  </div>
-                </div>
               </div>
             </motion.div>
           )}
@@ -139,21 +130,12 @@ const Home = () => {
               exit={{ opacity: 0 }}
               className={styles.stepOneDescription}
             >
-              <div className={styles.stepTwoText}>
-                <p>Select a Pick Up time and choose between Frozen or Hot.</p>
-                <p>
-                  Frozen - The meat will be smoked for 12 hours, taken off the
-                  smoker and rested for 2 hours minimum before being portioned
-                  into bags and frozen.
-                </p>
-                <p>
-                  Hot - When the meat is smoked, it is wrapped in foil after
-                  approximately 5 hours. This prevents too much smoke absorption
-                  and contains all the juicy drippings from the meat. The meat
-                  will finish smoking at the seleced pick-up time and you can
-                  come pick it up still wrapped fresh off the smoker. It is
-                  recommended to bring a cooler to transport the brisket/pork
-                  shoulder. Rest the meat for up to 4 hours and then enjoy.
+              <div className={styles.stepTwoTextContainer}>
+                <p>Select a Pick Up Time</p>
+                <p className={styles.stepText}>
+                  The meat will be smoked for 12 - 16 hours, taken off the
+                  smoker and rested for 2 hours before being portioned
+                  into bags and placed in the freezer for pick up. 
                 </p>
                 <button
                   className={styles.stepOneBtn}

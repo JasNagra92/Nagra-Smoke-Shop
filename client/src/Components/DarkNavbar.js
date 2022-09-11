@@ -9,7 +9,7 @@ const DarkNavbar = () => {
   const [cart, setCart] = useContext(CartContext);
 
   return (
-    <div class="container">
+    <div className="container">
       <div className={styles.NavContainer}>
         <div className={styles.Logo}>
           <h5>
