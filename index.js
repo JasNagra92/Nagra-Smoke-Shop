@@ -15,6 +15,7 @@ const testRoute = require('./routes/create-checkout-session')
 const checkoutSessionRoute = require('./routes/checkout-session')
 const webHookRoute = require('./routes/webHookRoute')
 const excludedDates = require('./routes/getExcludedDates')
+app.use('/webhook', webHookRoute);
 
 app.use(cors());
 app.use((req, res, next) => {
@@ -30,7 +31,6 @@ app.use(express.static(path.resolve(__dirname, './client/build')));
 app.use('/api/menu', menuRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/create-checkout-session', testRoute);
-app.use('/webhook', webHookRoute);
 app.use('/checkout-session', checkoutSessionRoute);
 app.use('/getExcludedDates', excludedDates)
 
