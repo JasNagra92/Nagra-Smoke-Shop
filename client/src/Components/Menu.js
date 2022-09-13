@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { CartContext } from "./CartContext";
 import { motion } from "framer-motion";
 import { BallTriangle } from "react-loader-spinner";
+import { toast } from 'react-toastify'
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -21,21 +22,30 @@ const Menu = () => {
       const data = await axios.get("/api/menu");
       const menuArray = data.data.result;
       const menu = menuArray.map((menuItem) => {
-        return { ...menuItem, quantity: 1};
+        return { ...menuItem, quantity: 1 };
       });
       setMenuItems(menu);
     };
     getMenuItems();
   }, []);
+
+  const itemAdded = () => {
+    toast.success('Item Added to Cart!', {
+      position: toast.POSITION.TOP_CENTER
+    })
+  }
+  const itemNotAdded = () => {
+    toast.error('Not enough Stock to add item!')
+  }
+
   // on click will set the menu items in cart but only their _ids,
   // only _ids will be sent to server then prices will be fetched from mongoDB
   const handleClick = (item) => {
-    if (cart.length === 0) {
-      setCart([item]);
-    }
-
     let foundProduct = cart.find((cartItem) => cartItem._id === item._id);
-    if (foundProduct) {
+    if (foundProduct && foundProduct.quantity >= item.stock) {
+      itemNotAdded();
+    } else if (foundProduct) {
+      itemAdded()
       setCart(
         cart.map((cartItem) =>
           cartItem._id === item._id
@@ -48,6 +58,7 @@ const Menu = () => {
       );
     } else {
       setCart([...cart, item]);
+      itemAdded()
     }
   };
 

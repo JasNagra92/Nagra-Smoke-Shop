@@ -69,7 +69,9 @@ const Cart = () => {
         console.log(error);
       }
     };
-    if (cart.length > 0) {showOrder()};
+    if (cart.length > 0) {
+      showOrder();
+    }
   }, []);
 
   // function returns an array of Date objects made from list of
@@ -100,64 +102,71 @@ const Cart = () => {
 
   return (
     <div>
-      {cart.length === 0 ? <div style={{height:'100vh', color:'white',textAlign:'center'}}><p>Cart is empty!</p></div> : <div>
-        <div className={styles.heading}>
-          <h2>Your Order</h2>
+      {cart.length === 0 ? (
+        <div style={{ height: "100vh", color: "white", textAlign: "center" }}>
+          <p>Cart is empty!</p>
         </div>
-        <div className={styles.cartContainer}>
-          <div className={styles.cartDiv}>
-            <div className={styles.tableDiv}>
-              <table className={styles.table}>
-                <tr>
-                  <th>Name</th>
-                  <th>Weight</th>
-                  <th>Quantity</th>
-                  <th>Price</th>
-                </tr>
-                {order.map((item) => (
-                  <tr key={item._id}>
-                    <td>{item.name}</td>
-                    <td>10Lbs</td>
-                    <td>{item.quantity}</td>
-                    <td>${item.price}</td>
+      ) : (
+        <div>
+          <div className={styles.heading}>
+            <h2>Your Order</h2>
+          </div>
+          <div className={styles.cartContainer}>
+            <div className={styles.cartDiv}>
+              <div className={styles.tableDiv}>
+                <table className={styles.table}>
+                  <tr>
+                    <th>Name</th>
+                    <th>Weight</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
                   </tr>
-                ))}
-              </table>
-              <div className={styles.totalDiv}>
-                <button onClick={handleSubmit} disabled={disableBtn}>
-                  checkout
-                </button>
-                <h4 className={styles.total}>
-                  Total: $
-                  {order.reduce(
-                    (total, current) => total + current.price * current.quantity,
-                    0
-                  )}
-                </h4>
-              </div>
-              <div className={styles.customerForm}>
-                <CustomerInfoForm
-                  handleInput={handleInput}
-                  customerInfo={customerInfo}
-                />
-                <label>Pickup Date:</label>
-                <DatePicker
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
-                  minDate={addDays(new Date(), 3)}
-                  excludeDates={disabledDates}
-                  showTimeSelect
-                  minTime={setHours(setMinutes(new Date(), 0), 8)}
-                  maxTime={setHours(setMinutes(new Date(), 0), 21)}
-                  timeFormat="HH:mm"
-                  dateFormat="MMMM,d,yyyy h:mm aa"
-                  placeholderText="Pick a day for pickup"
-                />
+                  {order.map((item) => (
+                    <tr key={item._id}>
+                      <td>{item.name}</td>
+                      <td>10Lbs</td>
+                      <td>{item.quantity}</td>
+                      <td>${item.price}</td>
+                    </tr>
+                  ))}
+                </table>
+                <div className={styles.totalDiv}>
+                  <button className={styles.cartBtn} onClick={handleSubmit} disabled={disableBtn}>
+                    checkout
+                  </button>
+                  <h4 className={styles.total}>
+                    Total: $
+                    {order.reduce(
+                      (total, current) =>
+                        total + current.price * current.quantity,
+                      0
+                    )}
+                  </h4>
+                </div>
+                <div className={styles.customerForm}>
+                  <CustomerInfoForm
+                    handleInput={handleInput}
+                    customerInfo={customerInfo}
+                  />
+                  <label>Pickup Date:</label>
+                  <DatePicker
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    minDate={addDays(new Date(), 3)}
+                    excludeDates={disabledDates}
+                    showTimeSelect
+                    minTime={setHours(setMinutes(new Date(), 0), 8)}
+                    maxTime={setHours(setMinutes(new Date(), 0), 21)}
+                    timeFormat="HH:mm"
+                    dateFormat="MMMM,d,yyyy h:mm aa"
+                    placeholderText="Pick a day for pickup"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>}
+      )}
     </div>
   );
 };
