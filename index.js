@@ -1,9 +1,4 @@
-const stripe = require('stripe')(
-  'sk_test_51Lb9wkAAgyKcvNJTRqDAxhoN8BH7ke0cYDHUIJW2n4VDJo4py8iq94QscVh518PpJ67FnvLLD9imJlIPuCC7YUkd00HamZx0mC'
-);
 const express = require('express');
-const endpointSecret =
-  'whsec_6b80fda20b62f1cdd04a7e4df2073cdddba1116601ffcebc47c65dd2e97cb03c';
 const path = require('path');
 require('dotenv').config();
 const cors = require('cors');

@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import styles from "../Styles/Cart.module.css";
 import axios from "axios";
 import CustomerInfoForm from "./CustomerInfoForm";
-import { addDays } from "date-fns";
+import { addDays, setHours, setMinutes } from "date-fns";
 const qs = require("qs");
 
 // react_app_baseURL is env variable provided by heroku on hosting
@@ -84,6 +84,10 @@ const Cart = () => {
     return excludedDates;
   };
 
+  const excludedTime = () => {
+    return 
+  };
+
   // on component mount get requeset recieves existing orders
   // pick up dates and stores them in disabled dates state array
   // to be given to react date picker to disable those dates
@@ -135,21 +139,23 @@ const Cart = () => {
               </h4>
             </div>
             <div className={styles.customerForm}>
-                <CustomerInfoForm
-                  handleInput={handleInput}
-                  customerInfo={customerInfo}
-                />
-                <label>Pickup Date:</label>
-                <DatePicker
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
-                  minDate={addDays(new Date(), 3)}
-                  excludeDates={disabledDates}
-                  showTimeSelect
-                  timeFormat="HH:mm"
-                  dateFormat="MMMM,d,yyyy h:mm aa"
-                  placeholderText="Pick a day for pickup"
-                />
+              <CustomerInfoForm
+                handleInput={handleInput}
+                customerInfo={customerInfo}
+              />
+              <label>Pickup Date:</label>
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                minDate={addDays(new Date(), 3)}
+                excludeDates={disabledDates}
+                showTimeSelect
+                minTime={setHours(setMinutes(new Date(), 0), 8)}
+                maxTime={setHours(setMinutes(new Date(), 0), 21)}
+                timeFormat="HH:mm"
+                dateFormat="MMMM,d,yyyy h:mm aa"
+                placeholderText="Pick a day for pickup"
+              />
             </div>
           </div>
         </div>

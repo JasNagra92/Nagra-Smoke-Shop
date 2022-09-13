@@ -4,10 +4,10 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const Order = require("../models/orderModel");
 const MenuItem = require("../models/menuItemModel");
-const stripe = require("stripe")(
-  "sk_test_51Lb9wkAAgyKcvNJTRqDAxhoN8BH7ke0cYDHUIJW2n4VDJo4py8iq94QscVh518PpJ67FnvLLD9imJlIPuCC7YUkd00HamZx0mC"
-);
-const endpointSecret = process.env.ENDPOINT_SECRET
+const stripe = require("stripe")(process.env.STRIPE_TEST_KEY);
+const endpointSecret = process.env.ENDPOINT_SECRET;
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 router.post("/", express.raw({ type: "application/json" }), (req, res) => {
   const payload = req.body;
@@ -23,7 +23,7 @@ router.post("/", express.raw({ type: "application/json" }), (req, res) => {
   }
 
   if (event.type === "checkout.session.completed") {
-    console.log(event.data.object)
+    console.log(event.data.object);
     const { id, amount_total } = event.data.object;
     const { name, email } = event.data.object.customer_details;
     const pickupDate = event.data.object.metadata;
@@ -71,8 +71,27 @@ router.post("/", express.raw({ type: "application/json" }), (req, res) => {
           orderNumber: orderNumber,
           items: lineItems.data,
           amount_total: amount_total,
-          OrderDate: Date.now()
+          OrderDate: Date.now(),
         });
+        const msg = {
+          to: email,
+          from: "nagra-smoke-house@outlook.com",
+          subject: "Order Confirmation - Nagra-Smoke-House",
+          text: "this is a test",
+          html: `<ul>
+          <li> ${name} </li>
+          <li> ${pickupDate.pickupDate} </li>
+          <li> your order number: ${orderNumber} </li>
+          </ul>`,
+        };
+        sgMail
+          .send(msg)
+          .then(() => {
+            console.log("Email Sent");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
         try {
           order.save();
           // after creating order, update the menu item document
