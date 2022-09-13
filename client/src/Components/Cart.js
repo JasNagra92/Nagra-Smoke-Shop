@@ -61,7 +61,9 @@ const Cart = () => {
   };
 
   const handleRemove = (item) => {
-    setCart(cart.filter(cartItem => cartItem._id === item._id ? false : cartItem))
+    setCart(
+      cart.filter((cartItem) => (cartItem._id === item._id ? false : cartItem))
+    );
   };
 
   // on component mount, request to server with cart item _ids will fetch the prices from server

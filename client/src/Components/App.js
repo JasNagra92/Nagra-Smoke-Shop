@@ -3,7 +3,7 @@ import { CartProvider } from "./CartContext";
 import { ToastContainer } from "react-toastify";
 import DarkNavbar from "./DarkNavbar";
 import "../Styles/App.css";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import AnimatedRoutes from "./AnimatedRoutes";
 
 function App() {

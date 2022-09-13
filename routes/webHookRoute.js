@@ -76,13 +76,20 @@ router.post("/", express.raw({ type: "application/json" }), (req, res) => {
         const msg = {
           to: email,
           from: "nagra-smoke-house@outlook.com",
-          subject: "Order Confirmation - Nagra-Smoke-House",
-          text: "this is a test",
-          html: `<ul>
-          <li> ${name} </li>
-          <li> ${pickupDate.pickupDate} </li>
-          <li> your order number: ${orderNumber} </li>
-          </ul>`,
+          templateId: "d-b4a225546f484a32b1e882fd3bfaf9ce",
+          dynamicTemplateData: {
+            customer_name: name,
+            customer_email: email,
+            order_number: orderNumber,
+            pickup_date: format(
+              new Date(`${pickupDate.pickupDate}`),
+              "MM/dd/yyyy H:mm"
+            ),
+            total: (amount_total / 100).toLocaleString("en-US", {
+              style: "currency",
+              currency: "CAD",
+            }),
+          },
         };
         sgMail
           .send(msg)

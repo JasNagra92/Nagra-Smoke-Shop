@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import pork from "../Images/Pork-Butt2.jpg";
 import brisket from "../Images/Brisket2.jpg";
 import frozen from "../Images/brisketsealed.jpg";
-import fresh from "../Images/freshsmoked.jpg";
 
 const Home = () => {
   const [step, setStep] = useState("intro");
@@ -134,8 +133,8 @@ const Home = () => {
                 <p>Select a Pick Up Time</p>
                 <p className={styles.stepText}>
                   The meat will be smoked for 12 - 16 hours, taken off the
-                  smoker and rested for 2 hours before being portioned
-                  into bags and placed in the freezer for pick up. 
+                  smoker and rested for 2 hours before being portioned into bags
+                  and placed in the freezer for pick up.
                 </p>
                 <button
                   className={styles.stepOneBtn}
