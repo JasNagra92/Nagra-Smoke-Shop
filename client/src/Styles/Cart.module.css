@@ -55,7 +55,7 @@ h2 {
   align-items: center;
   gap: 10px
 }
-.cartbtn {
+.cartBtn {
   background: #5469d4;
   font-family: Arial, sans-serif;
   color: #ffffff;
@@ -71,14 +71,20 @@ h2 {
   width: 100%;
 }
 
-.cartbtn:hover {
+.cartBtn:hover {
   filter: contrast(115%);
 }
 
-.cartbtn:disabled {
+.cartBtn:disabled {
   opacity: 0.5;
   cursor: default;
 }
 label, .total{
   color: white
+}
+.test{
+  text-align: center;
+}
+.removeCircle:hover{
+  scale: 1.2;
 }

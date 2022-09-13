@@ -50,6 +50,7 @@ router.post("/", async (req, res) => {
         pickupDate: payload.pickupDate,
       },
       mode: "payment",
+      allow_promotion_codes: true,
       success_url: `${YOUR_DOMAIN}success?id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${YOUR_DOMAIN}?canceled=true`,
       automatic_tax: { enabled: false },

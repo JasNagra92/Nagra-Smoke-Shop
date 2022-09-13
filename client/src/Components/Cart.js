@@ -1,8 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
 import { CartContext } from "./CartContext";
+import { toast } from "react-toastify";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "../Styles/Cart.module.css";
+import { MdRemoveCircle } from "react-icons/md";
 import axios from "axios";
 import CustomerInfoForm from "./CustomerInfoForm";
 import { addDays, setHours, setMinutes } from "date-fns";
@@ -13,7 +15,7 @@ axios.defaults.baseURL =
   process.env.REACT_APP_baseURL || "http://localhost:4000";
 
 const Cart = () => {
-  const [cart] = useContext(CartContext);
+  const [cart, setCart] = useContext(CartContext);
   const [disableBtn, setDisableBtn] = useState(true);
   const [order, setOrder] = useState([]);
   const [startDate, setStartDate] = useState(null);
@@ -22,6 +24,11 @@ const Cart = () => {
     name: "",
     email: "",
   });
+
+  const errorToast = () => {
+    toast.error("not enough stock to complete order :(");
+  };
+
   // payload will be used in fetch request to send order information to server
   const payload = { ...customerInfo, items: order, pickupDate: startDate };
 
@@ -46,11 +53,15 @@ const Cart = () => {
     const response = await axios.post("/create-checkout-session", { payload });
     const data = response.data;
     if (data.error) {
-      alert(data.error);
+      errorToast();
     } else {
       const target = data.url;
       window.location.href = target;
     }
+  };
+
+  const handleRemove = (item) => {
+    setCart(cart.filter(cartItem => cartItem._id === item._id ? false : cartItem))
   };
 
   // on component mount, request to server with cart item _ids will fetch the prices from server
@@ -127,11 +138,21 @@ const Cart = () => {
                       <td>10Lbs</td>
                       <td>{item.quantity}</td>
                       <td>${item.price}</td>
+                      <td className={styles.test}>
+                        <MdRemoveCircle
+                          className={styles.removeCircle}
+                          onClick={() => handleRemove(item)}
+                        />
+                      </td>
                     </tr>
                   ))}
                 </table>
                 <div className={styles.totalDiv}>
-                  <button className={styles.cartBtn} onClick={handleSubmit} disabled={disableBtn}>
+                  <button
+                    className={styles.cartBtn}
+                    onClick={handleSubmit}
+                    disabled={disableBtn}
+                  >
                     checkout
                   </button>
                   <h4 className={styles.total}>
