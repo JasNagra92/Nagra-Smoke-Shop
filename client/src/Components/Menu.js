@@ -87,6 +87,7 @@ const Menu = () => {
                     Add to Cart
                   </Button>
                   <h5>Stock available: {menuItems[0].stock}</h5>
+                  <h5>Price per 10lb: $125.00</h5>
                 </Card.Body>
               </Card>
 
@@ -104,6 +105,7 @@ const Menu = () => {
                     Add to Cart
                   </Button>
                   <h5>Stock available: {menuItems[1].stock}</h5>
+                  <h5>Price per 10lb: $100.00</h5>
                 </Card.Body>
               </Card>
             </div>
