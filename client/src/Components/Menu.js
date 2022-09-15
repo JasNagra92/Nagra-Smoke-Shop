@@ -3,6 +3,7 @@ import { CartContext } from "./CartContext";
 import { motion } from "framer-motion";
 import { BallTriangle } from "react-loader-spinner";
 import { toast } from "react-toastify";
+import Map from '../Components/Map'
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -15,6 +16,7 @@ axios.defaults.baseURL =
 const Menu = () => {
   const [cart, setCart] = useContext(CartContext);
   const [menuItems, setMenuItems] = useState();
+
   // use effect will retrieve items and their prices from the server to prevent price
   // manipulation and set them in state variable
   useEffect(() => {
@@ -78,7 +80,7 @@ const Menu = () => {
                 <Card.Body>
                   <Card.Title>10 lb Smoked Brisket</Card.Title>
                   <Card.Text>
-                    10lb Brisket smoked for 12 hours with Applewood pellets
+                    10lb Brisket smoked for 14 hours with Applewood pellets
                   </Card.Text>
                   <Button
                     variant="primary"
@@ -109,6 +111,14 @@ const Menu = () => {
                 </Card.Body>
               </Card>
             </div>
+          </div>
+          <div className={styles.mapContainer}>
+            <p className={styles.address}>
+              Pickup Location <br></br>
+              14786 69 ave <br></br>
+              Surrey BC <br></br>
+            </p>
+            <Map />
           </div>
         </div>
       ) : (

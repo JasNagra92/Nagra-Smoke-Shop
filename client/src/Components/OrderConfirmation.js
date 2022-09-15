@@ -33,7 +33,7 @@ const OrderConfirmation = () => {
               <h3>Thank you for your order {confirmedOrder.name}</h3>
             </div>
             <div className={styles.checkInbox}>
-              check your inbox for confirmation email
+              check your inbox/junk folder for confirmation email 
             </div>
             <div className={styles.orderDetails}>
               Order Number - {confirmedOrder.orderNumber}

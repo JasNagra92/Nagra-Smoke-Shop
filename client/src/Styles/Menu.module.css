@@ -1,11 +1,17 @@
 .menuContainer{
-
     height: 100vh
-}
-.card-img-top {
-    width: 50%;
-    height: 15vw;
 }
 h5{
     padding-top: 10px;
+}
+.mapContainer{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 10px;
+    align-items: center;
+}
+.address{
+    color: white;
+    font-weight: bold;
 }
