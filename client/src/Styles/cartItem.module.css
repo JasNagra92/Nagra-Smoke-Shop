@@ -1,0 +1,21 @@
+.cartItem{
+    display: flex;
+    color: white;
+    justify-content: space-between;
+    width: 100%;
+}
+.qpContainer{
+    position: relative;
+    display: flex;
+    gap: 20px;
+}
+.btn{
+    position: absolute;
+    left: 100px;
+    top: 13px;
+    background: transparent;
+    color: white;
+    width: 100px;
+    border: 1px solid white;
+    border-radius: 20px;
+}

@@ -1,10 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
+import CartItem from "../Components/CartItem";
 import { CartContext } from "./CartContext";
 import { toast } from "react-toastify";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "../Styles/Cart.module.css";
-import { MdRemoveCircle } from "react-icons/md";
+import { AnimatePresence } from "framer-motion";
 import axios from "axios";
 import CustomerInfoForm from "./CustomerInfoForm";
 import { addDays, setHours, setMinutes } from "date-fns";
@@ -61,6 +62,11 @@ const Cart = () => {
   };
 
   const handleRemove = (item) => {
+    setOrder(
+      order.filter((orderItem) =>
+        orderItem._id === item._id ? false : orderItem
+      )
+    );
     setCart(
       cart.filter((cartItem) => (cartItem._id === item._id ? false : cartItem))
     );
@@ -127,28 +133,24 @@ const Cart = () => {
           <div className={styles.cartContainer}>
             <div className={styles.cartDiv}>
               <div className={styles.tableDiv}>
-                <table className={styles.table}>
-                  <tr>
-                    <th>Name</th>
-                    <th>Weight</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                  </tr>
-                  {order.map((item) => (
-                    <tr key={item._id}>
-                      <td>{item.name}</td>
-                      <td>10Lbs</td>
-                      <td>{item.quantity}</td>
-                      <td>${item.price}</td>
-                      <td className={styles.test}>
-                        <MdRemoveCircle
-                          className={styles.removeCircle}
-                          onClick={() => handleRemove(item)}
-                        />
-                      </td>
-                    </tr>
-                  ))}
-                </table>
+                <div className={styles.headingsContainer}>
+                  <div>
+                    <p className={styles.cartHeadings}>Item</p>
+                  </div>
+                  <div className={styles.qpContainer}>
+                    <p className={styles.cartHeadings}>Quantity</p>
+                    <p className={styles.cartHeadings}>Price</p>
+                  </div>
+                </div>
+                {order.map((item) => (
+                  <AnimatePresence>
+                    <CartItem
+                      key={item._id}
+                      itemProps={item}
+                      handleRemoveProps={handleRemove}
+                    />
+                  </AnimatePresence>
+                ))}
                 <div className={styles.totalDiv}>
                   <button
                     className={styles.cartBtn}

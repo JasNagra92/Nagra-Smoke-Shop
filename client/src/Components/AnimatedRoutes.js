@@ -1,4 +1,3 @@
-import react from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Menu from "./Menu";
 import Home from "./Home";

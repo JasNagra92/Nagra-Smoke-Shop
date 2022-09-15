@@ -8,24 +8,6 @@
 ul {
   list-style-type: none;
 }
-table {
-  background-color: rgb(255, 255, 255);
-  width: 80%;
-}
-table,
-th,
-td {
-  border: 5px solid white;
-  border-collapse: collapse;
-}
-td,
-th {
-  width: 500px;
-  border: 1px solid black;
-}
-th {
-  text-align: center;
-}
 .cartDiv {
   display: flex;
   justify-content: center;
@@ -33,11 +15,27 @@ th {
   width: 65vw;
   border-radius: 15px;
 }
+.headingsContainer{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.cartHeadings{
+  color: white;
+  text-decoration: underline;
+  font-family:'Times New Roman', Times, serif;
+  font-size: larger;
+}
+.qpContainer{
+  display: flex;
+  gap: 20px
+}
 .tableDiv {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  width: 75%
 }
 .heading {
   text-align: center;
