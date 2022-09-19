@@ -50,7 +50,7 @@ router.post("/", async (req, res) => {
       mode: "payment",
       allow_promotion_codes: true,
       success_url: `${YOUR_DOMAIN}success?id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${YOUR_DOMAIN}canceled=true`,
+      cancel_url: `${YOUR_DOMAIN}cancelled=true`,
       automatic_tax: { enabled: false },
     });
     return res.json({ url: session.url });
