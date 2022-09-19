@@ -10,7 +10,7 @@ const OrderSchema = new Schema({
   orderNumber: {type: Number, required: true},
   paid: { type: Boolean, required: true },
   pickupDate: { type: String, required: true },
-  OrderDate: {type: Date, required: true}
+  OrderDate: {type: String, required: true}
 });
 
 module.exports = mongoose.model('order', OrderSchema);

@@ -7,6 +7,7 @@ const MenuItem = require("../models/menuItemModel");
 const stripe = require("stripe")(process.env.STRIPE_TEST_KEY);
 const endpointSecret = process.env.ENDPOINT_SECRET;
 const sgMail = require("@sendgrid/mail");
+const { formatInTimeZone } = require('date-fns-tz')
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 router.post("/", express.raw({ type: "application/json" }), (req, res) => {
@@ -62,16 +63,23 @@ router.post("/", express.raw({ type: "application/json" }), (req, res) => {
         if (err) {
           console.log(err);
         }
+        const today = new Date(Date.now())
         let order = new Order({
           name: name,
           email: email,
           checkoutSessionId: id,
           paid: true,
-          pickupDate: pickupDate.pickupDate,
+          pickupDate: formatInTimeZone(
+            new Date(`${pickupDate.pickupDate}`), 'Canada/Pacific',
+            "MM/dd/yyyy H:mm"
+          ),
           orderNumber: orderNumber,
           items: lineItems.data,
           amount_total: amount_total,
-          OrderDate: Date.now(),
+          OrderDate: formatInTimeZone(
+            today, 'Canada/Pacific',
+            "MM/dd/yyyy H:mm"
+          ),
         });
         const msg = {
           to: email,
@@ -81,8 +89,8 @@ router.post("/", express.raw({ type: "application/json" }), (req, res) => {
             customer_name: name,
             customer_email: email,
             order_number: orderNumber,
-            pickup_date: format(
-              new Date(`${pickupDate.pickupDate}`),
+            pickup_date: formatInTimeZone(
+              new Date(`${pickupDate.pickupDate}`), 'Canada/Pacific',
               "MM/dd/yyyy H:mm"
             ),
             total: (amount_total / 100).toLocaleString("en-US", {
