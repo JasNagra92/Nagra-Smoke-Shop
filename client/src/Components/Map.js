@@ -37,7 +37,6 @@ const Map = () => {
       onUnmount={onUnmount}
     >
       <MarkerF position={{ lat: 49.12822, lng: -122.81271}} />
-      <></>
     </GoogleMap>
 ) : <></>
 }

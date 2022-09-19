@@ -1,7 +1,5 @@
 // This is your test secret API key.
-const stripe = require("stripe")(
-  "sk_test_51Lb9wkAAgyKcvNJTRqDAxhoN8BH7ke0cYDHUIJW2n4VDJo4py8iq94QscVh518PpJ67FnvLLD9imJlIPuCC7YUkd00HamZx0mC"
-);
+const stripe = require("stripe")(process.env.STRIPE_TEST_KEY);
 const express = require("express");
 const router = express.Router();
 const MenuItems = require("../models/menuItemModel");
@@ -52,7 +50,7 @@ router.post("/", async (req, res) => {
       mode: "payment",
       allow_promotion_codes: true,
       success_url: `${YOUR_DOMAIN}success?id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${YOUR_DOMAIN}?canceled=true`,
+      cancel_url: `${YOUR_DOMAIN}canceled=true`,
       automatic_tax: { enabled: false },
     });
     return res.json({ url: session.url });
