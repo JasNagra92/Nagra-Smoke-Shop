@@ -5,7 +5,7 @@ import { useAuthContext } from "./useAuthContext";
 export const useSignup = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
-  const { dispatch } = useAuthContext()
+  const { dispatch } = useAuthContext();
 
   const signup = async (email, password) => {
     setIsLoading(true);
@@ -17,12 +17,12 @@ export const useSignup = () => {
       setError(response.data.error);
     }
     // store user/jwt in local storage
-    localStorage.setItem('user', JSON.stringify(response.data))
+    localStorage.setItem("user", JSON.stringify(response.data));
 
     // update authcontext
-    dispatch({type: 'LOGIN', payload: response.data})
+    dispatch({ type: "LOGIN", payload: response.data });
 
-    setIsLoading(false)
+    setIsLoading(false);
   };
 
   return { signup, isLoading, error };
