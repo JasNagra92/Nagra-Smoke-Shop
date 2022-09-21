@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { AuthContext } from "../Components/authContext";
 import axios from "axios";
 import { useAuthContext } from "./useAuthContext";
 

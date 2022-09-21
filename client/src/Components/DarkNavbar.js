@@ -3,10 +3,16 @@ import { NavLink } from "react-router-dom";
 import { BsFillCartFill } from "react-icons/bs";
 import { CartContext } from "./CartContext";
 import styles from "../Styles/Nav.module.css";
+import useLogout from "../hooks/useLogout";
 
 const DarkNavbar = () => {
   // import cart from context provider to update number of items
   const [cart, setCart] = useContext(CartContext);
+  const { logout } = useLogout();
+
+  const handleClick = () => {
+    logout();
+  };
 
   return (
     <div className="container">
@@ -64,6 +70,13 @@ const DarkNavbar = () => {
             >
               <p>Login</p>
             </NavLink>
+          </div>
+          <div
+            className={({ isActive }) =>
+              isActive ? styles.activeClassName : undefined
+            }
+          >
+            <button onClick={handleClick}>Logout</button>
           </div>
           <div>
             <NavLink
