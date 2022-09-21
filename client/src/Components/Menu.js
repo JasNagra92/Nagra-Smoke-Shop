@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { CartContext } from "./CartContext";
 import { motion } from "framer-motion";
-import { BallTriangle } from "react-loader-spinner";
+import { Puff } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import Map from '../Components/Map'
 import axios from "axios";
@@ -122,11 +122,11 @@ const Menu = () => {
           </div>
         </div>
       ) : (
-        <BallTriangle
+        <Puff
           height={100}
           width={100}
           radius={5}
-          color="#4fa94d"
+          color="white"
           ariaLabel="ball-triangle-loading"
           wrapperClass={{}}
           wrapperStyle=""
