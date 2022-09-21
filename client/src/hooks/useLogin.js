@@ -7,8 +7,8 @@ const useLogin = () => {
   const [error, setError] = useState(null);
   const { dispatch } = useAuthContext();
 
-  const login = async (username, password) => {
-    const response = await axios.post("/login", { username, password });
+  const login = async (email, password) => {
+    const response = await axios.post("/login", { email, password });
 
     if (response.data.error) {
       setLoading(false);
