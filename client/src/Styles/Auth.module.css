@@ -1,0 +1,28 @@
+:root{
+    --error: #e7195a
+}
+.formContainer{
+    height:100vh
+}
+.Form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 2px solid white;
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    background: transparent;
+    border-radius: 4px;
+}
+.Header{
+    color: white;
+}
+.error{
+    padding: 10px;
+    background: #ffefef;
+    border: 1px solid var(--error);
+    color: var(--error);
+    border-radius: 4px;
+    margin: 20px 0;
+}
