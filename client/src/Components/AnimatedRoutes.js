@@ -4,6 +4,8 @@ import Home from "./Home";
 import Cart from "./Cart";
 import OrderConfirmation from "./OrderConfirmation";
 import Cancelled from "./Cancelled";
+import Signup from "./Signup";
+import Login from "./Login";
 
 import { AnimatePresence } from "framer-motion";
 
@@ -18,6 +20,8 @@ const AnimatedRoutes = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/success" element={<OrderConfirmation />} />
         <Route path="/cancelled=true" element={<Cancelled />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </AnimatePresence>
   );

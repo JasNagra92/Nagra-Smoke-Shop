@@ -56,7 +56,24 @@ const DarkNavbar = () => {
             <p>BLOG</p>
           </div>
           <div>
-            <p>CONTACT</p>
+            <NavLink
+              to="/login"
+              className={({ isActive }) =>
+                isActive ? styles.activeClassName : undefined
+              }
+            >
+              <p>Login</p>
+            </NavLink>
+          </div>
+          <div>
+            <NavLink
+              to="/signup"
+              className={({ isActive }) =>
+                isActive ? styles.activeClassName : undefined
+              }
+            >
+              <p>Signup</p>
+            </NavLink>
           </div>
           <div>
             <NavLink
@@ -65,7 +82,7 @@ const DarkNavbar = () => {
                 isActive ? styles.activeClassName : undefined
               }
             >
-              <BsFillCartFill size={'30px'} />
+              <BsFillCartFill size={"30px"} />
               <div className={styles.cart}>{cart.length}</div>
             </NavLink>
           </div>
