@@ -177,11 +177,11 @@ const Cart = () => {
                   <DatePicker
                     selected={startDate}
                     onChange={(date) => setStartDate(date)}
-                    minDate={addDays(new Date(), 3)}
+                    minDate={addDays(new Date(), 4)}
                     excludeDates={disabledDates}
                     showTimeSelect
-                    minTime={setHours(setMinutes(new Date(), 0), 8)}
-                    maxTime={setHours(setMinutes(new Date(), 0), 21)}
+                    minTime={setHours(setMinutes(new Date(), 0), 18)}
+                    maxTime={setHours(setMinutes(new Date(), 0), 22)}
                     timeFormat="HH:mm"
                     dateFormat="MMMM,d,yyyy h:mm aa"
                     placeholderText="Pick a day for pickup"
