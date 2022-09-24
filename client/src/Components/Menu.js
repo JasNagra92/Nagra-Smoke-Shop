@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { CartContext } from "./CartContext";
+import { useAuthContext } from '../hooks/useAuthContext';
 import { motion } from "framer-motion";
 import { Puff } from "react-loader-spinner";
 import { toast } from "react-toastify";
@@ -16,6 +17,7 @@ axios.defaults.baseURL =
 const Menu = () => {
   const [cart, setCart] = useContext(CartContext);
   const [menuItems, setMenuItems] = useState();
+  const {user} = useAuthContext()
 
   // use effect will retrieve items and their prices from the server to prevent price
   // manipulation and set them in state variable
@@ -39,10 +41,19 @@ const Menu = () => {
   const itemNotAdded = () => {
     toast.error("Not enough Stock to add item!");
   };
+  const pleaseLogin = () => {
+    toast.error("please login or signup to make purchase")
+  }
 
   // on click will set the menu items in cart but only their _ids,
   // only _ids will be sent to server then prices will be fetched from mongoDB
   const handleClick = (item) => {
+
+    if(!user) {
+      pleaseLogin();
+      return
+    }
+
     let foundProduct = cart.find((cartItem) => cartItem._id === item._id);
     if (foundProduct && foundProduct.quantity >= item.stock) {
       itemNotAdded();
