@@ -1,17 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
 import useLogin from "../hooks/useLogin";
 import styles from "../Styles/Auth.module.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { user } = useAuthContext();
+  const navigate = useNavigate();
   const { login, isLoading, error } = useLogin();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    await login(email, password);
+    login(email, password);
   };
+  useEffect(() => {
+    if(user) {
+      navigate('/')
+    }
+  }, [ user ])
 
   return (
     <div className={styles.formContainer}>
