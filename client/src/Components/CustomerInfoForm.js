@@ -12,14 +12,6 @@ const CustomerInfoForm = ({ customerInfo, handleInput }) => {
           onChange={(e) => handleInput(e)}
           placeholder="Name"
         />
-        <label>Email:</label>
-        <input
-          type="text"
-          name="email"
-          value={customerInfo.email}
-          onChange={(e) => handleInput(e)}
-          placeholder="email"
-        />
       </div>
   );
 };

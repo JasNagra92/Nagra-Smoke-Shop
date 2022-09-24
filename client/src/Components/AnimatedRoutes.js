@@ -1,4 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { Navigate } from "react-router-dom";
 import Menu from "./Menu";
 import Home from "./Home";
 import Cart from "./Cart";
@@ -10,6 +12,7 @@ import Login from "./Login";
 import { AnimatePresence } from "framer-motion";
 
 const AnimatedRoutes = () => {
+  const { user } = useAuthContext();
   const location = useLocation();
 
   return (
@@ -17,7 +20,7 @@ const AnimatedRoutes = () => {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<Menu />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/cart" element={user ? <Cart /> : <Navigate to="/" />} />
         <Route path="/success" element={<OrderConfirmation />} />
         <Route path="/cancelled=true" element={<Cancelled />} />
         <Route path="/login" element={<Login />} />

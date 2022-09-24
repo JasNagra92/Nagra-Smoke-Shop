@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import CartItem from "../Components/CartItem";
 import { CartContext } from "./CartContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 import { toast } from "react-toastify";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -21,9 +22,10 @@ const Cart = () => {
   const [order, setOrder] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [disabledDates, setDisabledDates] = useState();
+  const { user } = useAuthContext()
   const [customerInfo, setCustomerInfo] = useState({
     name: "",
-    email: "",
+    email: user.email,
   });
 
   const errorToast = () => {
