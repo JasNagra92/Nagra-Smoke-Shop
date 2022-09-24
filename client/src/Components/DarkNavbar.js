@@ -5,10 +5,12 @@ import { CartContext } from "./CartContext";
 import styles from "../Styles/Nav.module.css";
 import useLogout from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useNavigate } from "react-router-dom";
 
 const DarkNavbar = () => {
   // import cart from context provider to update number of items
   const [cart] = useContext(CartContext);
+  const Navigate = useNavigate()
   const { logout } = useLogout();
   const { user } = useAuthContext();
 
@@ -60,16 +62,13 @@ const DarkNavbar = () => {
           <div>
             <p>TEAM</p>
           </div>
-          <div>
-            <p>BLOG</p>
-          </div>
           {user && (
             <div
               className={({ isActive }) =>
                 isActive ? styles.activeClassName : undefined
               }
             >
-              <span>{user.email}</span>
+              <span style={{cursor: 'pointer'}} onClick={()=>Navigate('/myAccount')}>{user.email}</span>
               <button onClick={handleClick}>Logout</button>
             </div>
           )}
