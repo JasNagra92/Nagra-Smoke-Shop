@@ -10,6 +10,7 @@ import Signup from "./Signup";
 import Login from "./Login";
 
 import { AnimatePresence } from "framer-motion";
+import MyAccount from "./MyAccount";
 
 const AnimatedRoutes = () => {
   const { user } = useAuthContext();
@@ -25,6 +26,7 @@ const AnimatedRoutes = () => {
         <Route path="/cancelled=true" element={<Cancelled />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/myAccount" element={user? <MyAccount /> : <Navigate to='/login' />} />
       </Routes>
     </AnimatePresence>
   );
