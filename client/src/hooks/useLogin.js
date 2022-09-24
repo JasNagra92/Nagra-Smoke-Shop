@@ -13,6 +13,7 @@ const useLogin = () => {
     if (response.data.error) {
       setLoading(false);
       setError(response.data.error);
+      return
     }
     // set user in localStorage
     localStorage.setItem("user", JSON.stringify(response.data));
