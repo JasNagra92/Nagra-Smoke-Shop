@@ -38,7 +38,14 @@ const DarkNavbar = () => {
             </NavLink>
           </div>
           <div>
-            <p>RESERVATION</p>
+            <NavLink
+              to="/location"
+              className={({ isActive }) =>
+                isActive ? styles.activeClassName : undefined
+              }
+            >
+              <p className={styles.link}>LOCATION</p>
+            </NavLink>
           </div>
           <div>
             <p>ABOUT US</p>
@@ -68,7 +75,7 @@ const DarkNavbar = () => {
                 isActive ? styles.activeClassName : undefined
               }
             >
-              <span style={{cursor: 'pointer'}} onClick={()=>Navigate('/myAccount')}>{user.email}</span>
+              <span style={{cursor: 'pointer', marginRight: '10px'}} onClick={()=>Navigate('/myAccount')}>{user.email}</span>
               <button onClick={handleClick}>Logout</button>
             </div>
           )}

@@ -8,6 +8,7 @@ import OrderConfirmation from "./OrderConfirmation";
 import Cancelled from "./Cancelled";
 import Signup from "./Signup";
 import Login from "./Login";
+import Location from "./Location";
 
 import { AnimatePresence } from "framer-motion";
 import MyAccount from "./MyAccount";
@@ -20,6 +21,7 @@ const AnimatedRoutes = () => {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
+        <Route path="/location" element={<Location />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/cart" element={user ? <Cart /> : <Navigate to="/" />} />
         <Route path="/success" element={<OrderConfirmation />} />
