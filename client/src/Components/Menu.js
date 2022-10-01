@@ -4,7 +4,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import { motion } from "framer-motion";
 import { Puff } from "react-loader-spinner";
 import { toast } from "react-toastify";
-import Map from '../Components/Map'
+import Modal from './Modal'
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -122,14 +122,6 @@ const Menu = () => {
                 </Card.Body>
               </Card>
             </div>
-          </div>
-          <div className={styles.mapContainer}>
-            <p className={styles.address}>
-              Pickup Location <br></br>
-              14786 69 ave <br></br>
-              Surrey BC <br></br>
-            </p>
-            <Map />
           </div>
         </div>
       ) : (

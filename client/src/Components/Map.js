@@ -1,8 +1,8 @@
 import { useState, useCallback } from "react";
 import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
 const containerStyle = {
-  width: "250px",
-  height: "250px",
+  width: "350px",
+  height: "350px",
 };
 
 const center = {
@@ -19,8 +19,6 @@ const Map = () => {
   const [map, setMap] = useState(null);
 
   const onLoad = useCallback(function callback(map) {
-    const bounds = new window.google.maps.LatLngBounds(center);
-    map.fitBounds(bounds);
     setMap(map);
   }, []);
 
