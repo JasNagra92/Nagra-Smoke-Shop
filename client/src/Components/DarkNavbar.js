@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { BsFillCartFill } from "react-icons/bs";
+import { BsFillPersonFill } from 'react-icons/bs'
 import { CartContext } from "./CartContext";
 import styles from "../Styles/Nav.module.css";
 import useLogout from "../hooks/useLogout";
@@ -75,7 +76,7 @@ const DarkNavbar = () => {
                 isActive ? styles.activeClassName : undefined
               }
             >
-              <span style={{cursor: 'pointer', marginRight: '10px'}} onClick={()=>Navigate('/myAccount')}>{user.email}</span>
+              <span style={{cursor: 'pointer', marginRight: '10px'}} onClick={()=>Navigate('/myAccount')}><BsFillPersonFill size={'25px'} color={'orange'} /></span>
               <button onClick={handleClick}>Logout</button>
             </div>
           )}
