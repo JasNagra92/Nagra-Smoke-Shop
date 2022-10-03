@@ -6,12 +6,11 @@ import { Puff } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import Modal from './Modal'
 import axios from "axios";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
 import brisket from "../Images/brisket.jpg";
 import pork from "../Images/Pork-Butt.jpg";
 import chicken from '../Images/chicken.jpg'
 import styles from "../Styles/Menu.module.css";
+import MenuItem from "./MenuItem";
 axios.defaults.baseURL =
   process.env.REACT_APP_baseURL || "http://localhost:4000";
 
@@ -87,61 +86,21 @@ const Menu = () => {
       {menuItems ? (
         <div>
           <div className="container">
-            <div className="d-flex justify-content-evenly">
-              <Card bg="dark" text="light" style={{ width: "15rem" }}>
-                <Card.Img variant="top" src={brisket} />
-                <Card.Body>
-                  <Card.Title>10 lb Smoked Brisket</Card.Title>
-                  <Card.Text>
-                    10lb Brisket smoked for 14 hours with Applewood pellets
-                  </Card.Text>
-                  <Button
-                    variant="primary"
-                    onClick={() => handleClick(menuItems[0])}
-                  >
-                    Add to Cart
-                  </Button>
-                  <h5>Stock available: {menuItems[0].stock}</h5>
-                  <h5>Price per 10lb: $125.00</h5>
-                </Card.Body>
-              </Card>
-
-              <Card bg="dark" text="light" style={{ width: "15rem" }}>
-                <Card.Img variant="top" src={pork} />
-                <Card.Body>
-                  <Card.Title>10 lb Pulled Pork</Card.Title>
-                  <Card.Text>
-                    10lb Boston Butt smoked for 12 hours with Applewood pellets
-                  </Card.Text>
-                  <Button
-                    variant="primary"
-                    onClick={() => handleClick(menuItems[1])}
-                  >
-                    Add to Cart
-                  </Button>
-                  <h5>Stock available: {menuItems[1].stock}</h5>
-                  <h5>Price per 10lb: $100.00</h5>
-                </Card.Body>
-              </Card>
-
-              <Card bg="dark" text="light" style={{ width: "15rem" }}>
-                <Card.Img variant="top" src={chicken} />
-                <Card.Body>
-                  <Card.Title>Smoked Drumsticks</Card.Title>
-                  <Card.Text>
-                    5 or 10 smoked chicken drumsticks with your choice of seasoning
-                  </Card.Text>
-                  <Button
-                    variant="primary"
-                    onClick={() => setOpenModal(!openModal)}
-                  >
-                    Add to Cart
-                  </Button>
-                  <h5>5 drumsticks: 15$</h5>
-                  <h5>10 drumsticks: 25$</h5>
-                </Card.Body>
-              </Card>
-            </div>
+            <MenuItem
+             image={brisket}
+             addItem={handleClick}
+             item={menuItems[0]}
+             />
+            <MenuItem
+             image={pork}
+             addItem={handleClick}
+             item={menuItems[1]}
+             />
+            {/* <MenuItem
+             image={chicken}
+             addItem={handleClick}
+             item={menuItems[2]}
+             /> */}
           </div>
           {openModal ? <Modal closeModal={()=>setOpenModal(!openModal)} /> : null}
         </div>
