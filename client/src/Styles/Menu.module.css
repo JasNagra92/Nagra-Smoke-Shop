@@ -1,6 +1,19 @@
 .menuContainer{
-    height: 100vh
+    background-color: #F5F5F5;
+    padding-top: 10px;
 }
 h5{
     padding-top: 10px;
+}
+.seasoningsContainer{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.seasoning{
+    height: 300px;
+    cursor: pointer;
+}
+.seasoning:hover{
+    border: 2px solid black
 }

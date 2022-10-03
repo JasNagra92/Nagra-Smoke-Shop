@@ -15,11 +15,13 @@ const MenuItem = (props) => {
           <img src={image} alt="" />
         </div>
         <div className={styles.description}>
-          <h2 style={{ textAlign: "left" }}>Smoked {item.name}</h2>
+          <h3 style={{ textAlign: "left", color: 'black'}}>Smoked {item.name}</h3>
           <p>{item.description}</p>
         </div>
         <div className={styles.btnContainer}>
-          <button className={styles.orderBtn}>Order Now</button>
+          <button onClick={()=>addItem(item)} className={styles.orderBtn}>Order Now</button>
+          <p>Available Stock: {item.stock}</p>
+          <p>Price: {item.price}</p>
         </div>
       </div>
     </div>

@@ -11,6 +11,11 @@ import pork from "../Images/Pork-Butt.jpg";
 import chicken from '../Images/chicken.jpg'
 import styles from "../Styles/Menu.module.css";
 import MenuItem from "./MenuItem";
+import hot from "../Images/hotrub.jpg";
+import sweetbbq from "../Images/sweetbbq.jpeg"
+import blues from '../Images/blues.jpg'
+import houseq from '../Images/houseq.jpeg'
+import bbq from "../Images/bbqrub.jpg";
 axios.defaults.baseURL =
   process.env.REACT_APP_baseURL || "http://localhost:4000";
 
@@ -101,6 +106,26 @@ const Menu = () => {
              addItem={handleClick}
              item={menuItems[2]}
              /> */}
+             <div>
+              <h2 style={{color:'black', padding:'20px'}}>Seasonings</h2>
+              <div className={styles.seasoningsContainer}>
+                <div>
+                  <a href="https://therubshack.ca/product/killer-hogs-the-hot-bbq-rub/"><img className={styles.seasoning} src={hot} alt="" /></a>
+                </div>
+                <div>
+                  <a href="https://therubshack.ca/product/killer-hogs-the-bbq-rub/"><img className={styles.seasoning} src={bbq} alt="" /></a>
+                </div>
+                <div>
+                  <a href="https://houseofq.com/product/house-rub-bbq-seasoning/"><img className={styles.seasoning} src={houseq} alt="" /></a>
+                </div>
+                <div>
+                  <a href="https://therubshack.ca/product/heath-riles-bbq-sweet-bbq-rub-huge-16-oz-shaker/"><img className={styles.seasoning} src={sweetbbq} alt="" /></a>
+                </div>
+                <div>
+                  <a href="https://www.johnstones.com/bbq-sauce-memphis-blues-all-purpose-rub.html"><img className={styles.seasoning} src={blues} alt="" /></a>
+                </div>
+              </div>
+             </div>
           </div>
           {openModal ? <Modal closeModal={()=>setOpenModal(!openModal)} /> : null}
         </div>

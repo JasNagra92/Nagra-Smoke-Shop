@@ -6,7 +6,7 @@ router.get("/", (req, res) => {
   const db = mongoose.connection.db;
   db.collection("menuItems")
     .find({})
-    .project({ _id: 1, stock: 1, name: 1, description: 1 })
+    .project({ price_id: 0 })
     .sort({ name: "ascending" })
     .toArray((err, result) => {
       if (err) {
