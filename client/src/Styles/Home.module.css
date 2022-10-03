@@ -9,8 +9,6 @@
   grid-area: 2/1/3/2;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 .title {
   color: white;
@@ -19,7 +17,8 @@
 }
 #nagra {
   font-family: "Alex Brush";
-  font-size: larger;
+  font-size: 3.5rem;
+  color: orange;
 }
 #howItWorks,
 .stepOneBtn {
@@ -40,6 +39,10 @@
 .stepOneBtn:hover {
   background-color: black;
   scale: 1.2;
+}
+.btn{
+  display: flex;
+  justify-content: center;
 }
 .stepOneBtn {
   width: 50%;
