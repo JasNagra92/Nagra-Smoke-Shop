@@ -19,10 +19,10 @@ const Modal = ({ closeModal }) => {
           <p onClick={() => closeModal()}>X</p>
         </div>
         <div className={styles.imgContainer}>
-          <div className={styles.imgDiv}>
+          <div style={selectedRub === 'hot' ? selectedStyle : null} onClick={()=> setSelectedRub('hot')} className={styles.imgDiv}>
             <img className={styles.modalImg} src={hot} alt="hot rub" />
           </div>
-          <div className={styles.imgDiv}>
+          <div style={selectedRub === 'bbq' ? selectedStyle : null} onClick={()=> setSelectedRub('bbq')} className={styles.imgDiv}>
             <img className={styles.modalImg} src={bbq} alt="hot rub" />
           </div>
           <div className={styles.imgDiv}>

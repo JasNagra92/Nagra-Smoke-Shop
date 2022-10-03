@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import pork from "../Images/Pork-Butt2.jpg";
 import brisket from "../Images/Brisket2.jpg";
 import frozen from "../Images/brisketsealed.jpg";
+import chef from '../Images/chef.svg'
 
 const Home = () => {
   const [step, setStep] = useState("intro");
@@ -48,6 +49,9 @@ const Home = () => {
                   >
                     How It Works
                   </button>
+                </div>
+                <div>
+                  <img className={styles.test} src={chef} alt="chef" srcset="" />
                 </div>
               </div>
             </motion.div>
