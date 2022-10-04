@@ -13,7 +13,6 @@ const excludedDates = require('./routes/getExcludedDates')
 const loginRoute = require('./routes/loginUser') 
 const signupRoute = require('./routes/signupUser')
 const myAccountRoute = require('./routes/myAccount');
-const requireAuth = require('./middleware/requireAuth');
 
 app.use('/webhook', webHookRoute);
 
@@ -35,13 +34,12 @@ app.use('/checkout-session', checkoutSessionRoute);
 app.use('/getExcludedDates', excludedDates);
 app.use('/login', loginRoute);
 app.use('/signup', signupRoute)
+app.use('/myAccount', myAccountRoute)
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
 });
 
-app.use(requireAuth)
-app.use('/myAccount', myAccountRoute)
 
 mongoose
   .connect(process.env.MONGODB_URL, {
