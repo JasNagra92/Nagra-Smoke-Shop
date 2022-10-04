@@ -1,0 +1,50 @@
+.cart{
+    position:relative;
+    bottom: 10px;
+    right: 10px;
+    background-color: black;
+    border-radius: 50%;
+    width:20px;
+    text-align: center;
+    color: white;
+}
+a{
+    text-decoration: none;
+    color:white
+}
+a:hover{
+    color: orange;
+    transition: .2s ease-in-out;
+}
+p{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.NavContainer{
+    display: flex;
+    justify-content: space-between;
+    color: white;
+}
+.Logo{
+    display: flex;
+    align-items: center;
+}
+h5{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.links{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-size: .75rem;
+    margin-top: 1rem;
+}
+.activeClassName{
+    position: relative;
+    color: orange;
+}
+#nagra{
+    font-family: 'Alex Brush'
+}

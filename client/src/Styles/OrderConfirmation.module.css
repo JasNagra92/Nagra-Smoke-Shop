@@ -1,0 +1,56 @@
+.mainContainer{
+    height: 100vh;
+    padding-top: 10vh;
+}
+.receiptContainer{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr 1fr .75fr .75fr .75fr .75fr;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    padding: 20px;
+}
+.thankYou{
+    grid-area: 1/1/2/4;
+    text-align: center;
+}
+.checkInbox{
+    grid-area: 2/1/3/4;
+    padding-top: 0px;
+    text-align: center;
+}
+.orderDetails{
+    grid-area: 3/1/4/4;
+    text-align: left;
+    font-weight: bold;
+    padding-top: 10px
+}
+.orderTotalRow{
+    grid-area: 4/1/5/4;
+}
+.emailRow{
+    grid-area: 5/1/6/4;
+}
+.footer{
+    grid-area: 6/1/7/4;
+    text-align: center;
+}
+.total{
+    grid-area: 4/1/5/2;
+}
+.date{
+    grid-area: 4/2/5/3;
+}
+.method{
+    grid-area: 4/3/5/4;
+}
+.email{
+    grid-area: 5/1/6/2;
+}
+.pdate{
+    grid-area: 5/2/6/3;
+}
+.delivery{
+    grid-area: 5/3/5/4;
+}
