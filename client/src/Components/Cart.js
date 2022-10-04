@@ -130,7 +130,7 @@ const Cart = () => {
       ) : (
         <div>
           <div className={styles.heading}>
-            <h2>Your Order</h2>
+            <h2 className={styles.heading}>Your Order</h2>
           </div>
           <div className={styles.cartContainer}>
             <div className={styles.cartDiv}>

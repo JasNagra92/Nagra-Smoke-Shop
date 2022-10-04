@@ -8,14 +8,9 @@ import Modal from './Modal'
 import axios from "axios";
 import brisket from "../Images/brisket.jpg";
 import pork from "../Images/Pork-Butt.jpg";
-import chicken from '../Images/chicken.jpg'
 import styles from "../Styles/Menu.module.css";
 import MenuItem from "./MenuItem";
-import hot from "../Images/hotrub.jpg";
-import sweetbbq from "../Images/sweetbbq.jpeg"
-import blues from '../Images/blues.jpg'
-import houseq from '../Images/houseq.jpeg'
-import bbq from "../Images/bbqrub.jpg";
+import SeasoningsTable from "./SeasoningsTable";
 axios.defaults.baseURL =
   process.env.REACT_APP_baseURL || "http://localhost:4000";
 
@@ -81,6 +76,11 @@ const Menu = () => {
     }
   };
 
+  const onChangeInput = (value, item) => {
+    console.log(value)
+    console.log(item)
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -95,37 +95,20 @@ const Menu = () => {
              image={brisket}
              addItem={handleClick}
              item={menuItems[0]}
+             onChange={onChangeInput}
              />
             <MenuItem
              image={pork}
              addItem={handleClick}
              item={menuItems[1]}
+             onChange={onChangeInput}
              />
             {/* <MenuItem
              image={chicken}
              addItem={handleClick}
              item={menuItems[2]}
              /> */}
-             <div>
-              <h2 style={{color:'black', padding:'20px'}}>Seasonings</h2>
-              <div className={styles.seasoningsContainer}>
-                <div>
-                  <a href="https://therubshack.ca/product/killer-hogs-the-hot-bbq-rub/"><img className={styles.seasoning} src={hot} alt="" /></a>
-                </div>
-                <div>
-                  <a href="https://therubshack.ca/product/killer-hogs-the-bbq-rub/"><img className={styles.seasoning} src={bbq} alt="" /></a>
-                </div>
-                <div>
-                  <a href="https://houseofq.com/product/house-rub-bbq-seasoning/"><img className={styles.seasoning} src={houseq} alt="" /></a>
-                </div>
-                <div>
-                  <a href="https://therubshack.ca/product/heath-riles-bbq-sweet-bbq-rub-huge-16-oz-shaker/"><img className={styles.seasoning} src={sweetbbq} alt="" /></a>
-                </div>
-                <div>
-                  <a href="https://www.johnstones.com/bbq-sauce-memphis-blues-all-purpose-rub.html"><img className={styles.seasoning} src={blues} alt="" /></a>
-                </div>
-              </div>
-             </div>
+             <SeasoningsTable />
           </div>
           {openModal ? <Modal closeModal={()=>setOpenModal(!openModal)} /> : null}
         </div>

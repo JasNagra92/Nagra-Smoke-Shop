@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../Styles/Home.module.css";
 import { motion, AnimatePresence } from "framer-motion";
