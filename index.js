@@ -35,13 +35,13 @@ app.use('/checkout-session', checkoutSessionRoute);
 app.use('/getExcludedDates', excludedDates);
 app.use('/login', loginRoute);
 app.use('/signup', signupRoute)
-app.use(requireAuth)
-app.use('/myAccount', myAccountRoute)
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
 });
 
+app.use(requireAuth)
+app.use('/myAccount', myAccountRoute)
 
 mongoose
   .connect(process.env.MONGODB_URL, {
