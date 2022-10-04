@@ -36,9 +36,9 @@ app.use('/getExcludedDates', excludedDates);
 app.use('/login', loginRoute);
 app.use('/signup', signupRoute)
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
+// });
 
 app.use(requireAuth)
 app.use('/myAccount', myAccountRoute)
