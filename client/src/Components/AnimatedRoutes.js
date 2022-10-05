@@ -23,7 +23,7 @@ const AnimatedRoutes = () => {
         <Route path="/" element={<Home />} />
         <Route path="/location" element={<Location />} />
         <Route path="/menu" element={<Menu />} />
-        <Route path="/cart" element={user ? <Cart /> : <Navigate to="/" />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/success" element={<OrderConfirmation />} />
         <Route path="/cancelled=true" element={<Cancelled />} />
         <Route path="/login" element={<Login />} />
