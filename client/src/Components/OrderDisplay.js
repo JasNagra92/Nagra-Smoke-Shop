@@ -7,7 +7,10 @@ const OrderDisplay = (props) => {
             <p>{orderNumber}</p>
             <p>{OrderDate}</p>
             <p>{pickupDate}</p>
-            <p>{amount_total}</p>
+            <p>{(amount_total / 100).toLocaleString("en-US", {
+                  style: "currency",
+                  currency: "CAD",
+                })}</p>
         </div>
     )
 }

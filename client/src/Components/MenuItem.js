@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import styles from "../Styles/MenuItem.module.css";
 import Select from "react-select";
 
@@ -15,10 +14,6 @@ const MenuItem = (props) => {
     { value: "holyCow", label: "Meat Church Holy Cow BBQ rub" },
     { value: "gospel", label: "Meat Church The Gospel AP rub" },
   ];
-
-  useEffect(() => {
-    console.log(props);
-  }, []);
 
   return (
     <div className={styles.mainContainer}>
