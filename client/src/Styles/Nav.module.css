@@ -58,4 +58,7 @@ h5{
         display: flex;
         justify-content: center;
     }
+    .links{
+        gap: 10px;
+    }
 }
