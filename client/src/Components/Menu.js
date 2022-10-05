@@ -16,7 +16,7 @@ axios.defaults.baseURL =
 
 const Menu = () => {
   const [cart, setCart] = useContext(CartContext);
-  const [menuItems, setMenuItems] = useState();
+  const [menuItems, setMenuItems] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const { user } = useAuthContext();
 
@@ -29,6 +29,7 @@ const Menu = () => {
       const menu = menuArray.map((menuItem) => {
         return { ...menuItem, quantity: 1 };
       });
+
       setMenuItems(menu);
     };
     getMenuItems();

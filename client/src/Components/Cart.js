@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "../Styles/Cart.module.css";
-import { AnimatePresence } from "framer-motion";
 import axios from "axios";
 import CustomerInfoForm from "./CustomerInfoForm";
 import { addDays, setHours, setMinutes } from "date-fns";
@@ -145,13 +144,11 @@ const Cart = () => {
                   </div>
                 </div>
                 {order.map((item) => (
-                  <AnimatePresence>
-                    <CartItem
-                      key={item._id}
-                      itemProps={item}
-                      handleRemoveProps={handleRemove}
-                    />
-                  </AnimatePresence>
+                  <CartItem
+                    key={item._id}
+                    itemProps={item}
+                    handleRemoveProps={handleRemove}
+                  />
                 ))}
                 <div className={styles.totalDiv}>
                   <button

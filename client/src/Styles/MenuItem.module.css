@@ -55,6 +55,7 @@
     flex-direction: column;
     justify-content: center;
   }
+
 }
 @media (max-width: 1400px) {
   .topHalf {

@@ -1,6 +1,6 @@
 .background{
   background-image: url('../Images/Home2.jpeg');
-  background-size: cover;
+  /* background-size: cover; */
   background-position: center;
   background-attachment: fixed;
 }
@@ -11,6 +11,6 @@
 @media (max-width: 500px){
   .background{
     background-image: url('../Images/mobileBrisket.jpg');
-    background-size: cover;
+    /* background-size: cover; */
   }
 }
