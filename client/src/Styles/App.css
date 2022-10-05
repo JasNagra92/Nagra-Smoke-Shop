@@ -1,8 +1,7 @@
-/* .background{
+.background{
   background-image: url('../Images/Home2.jpeg');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
 }
 .overlay{
   background-color: rgba(0,0,0,0.4);
@@ -13,4 +12,4 @@
     background-image: url('../Images/mobileBrisket.jpg');
     background-size: cover;
   }
-} */
+}
