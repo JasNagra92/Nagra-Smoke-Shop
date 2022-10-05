@@ -11,39 +11,26 @@ const Home = () => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="container"
-    >
+    <div className="container">
       <div className={styles.homeContainer}>
-        <AnimatePresence mode="wait">
-          {
-            <motion.div
-              key={"introTitle"}
-              className={styles.contentIntro}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              <div>
-                <div className={styles.title}>
-                  <h1>
-                    <span id={styles.nagra}>Nagra</span> Smoke House
-                  </h1>
-                </div>
-                <div className={styles.btnContainer}>
-                  <button className={styles.btn} onClick={() => handleClick()}>
-                    Our Menu
-                  </button>
-                </div>
+        {
+          <div key={"introTitle"} className={styles.contentIntro}>
+            <div>
+              <div className={styles.title}>
+                <h1>
+                  <span id={styles.nagra}>Nagra</span> Smoke House
+                </h1>
               </div>
-            </motion.div>
-          }
-        </AnimatePresence>
+              <div className={styles.btnContainer}>
+                <button className={styles.btn} onClick={() => handleClick()}>
+                  Our Menu
+                </button>
+              </div>
+            </div>
+          </div>
+        }
       </div>
-    </motion.div>
+    </div>
   );
 };
 export default Home;

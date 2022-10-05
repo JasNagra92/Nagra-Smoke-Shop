@@ -1,16 +1,12 @@
 import React from "react";
 import styles from "../Styles/cartItem.module.css";
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 
 const CartItem = (props) => {
   const { name, quantity, price } = props.itemProps;
 
   return (
-    <motion.div 
-    initial={{opacity: 0}}
-    animate={{opacity:1}}
-    exit={{opacity:0}}
-    className={styles.cartItem}>
+    <div className={styles.cartItem}>
       <div>
         <p>{name}</p>
       </div>
@@ -24,7 +20,7 @@ const CartItem = (props) => {
           Remove
         </button>
       </div>
-    </motion.div>
+    </div>
   );
 };
 export default CartItem;
