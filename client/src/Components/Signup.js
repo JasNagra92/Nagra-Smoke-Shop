@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useState} from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useSignup } from "../hooks/useSignup";
 import styles from "../Styles/Auth.module.css";
@@ -7,24 +8,26 @@ import styles from "../Styles/Auth.module.css";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { user } = useAuthContext()
+  const navigate = useNavigate()
   const { signup, error, isLoading } = useSignup();
-
+  const { user } = useAuthContext()
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     signup(email, password);
+    
   };
 
-  useEffect(() => {
-    if (user) {
-      Navigate('/')
+  useEffect(()=>{
+    if(user) {
+      navigate('/')
     }
-  }, [ user ])
+  }, [user])
 
   return (
     <div className={styles.formContainer}>
-      <form className={styles.Form} onSubmit={handleSubmit}>
+      <form className={styles.Form} onSubmit={(e)=>handleSubmit(e)}>
         <h3 className={styles.Header}>Sign up</h3>
         <label>Email:</label>
         <input

@@ -15,6 +15,7 @@ export const useSignup = () => {
     if (response.data.error) {
       setIsLoading(false);
       setError(response.data.error);
+      return
     }
     // store user/jwt in local storage
     localStorage.setItem("user", JSON.stringify(response.data));
