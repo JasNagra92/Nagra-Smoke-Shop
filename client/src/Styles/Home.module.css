@@ -20,7 +20,7 @@
   font-size: 3.5rem;
   color: orange;
 }
-#howItWorks
+.btn
 {
   background-color: transparent;
   font-family: Arial, sans-serif;
@@ -35,11 +35,11 @@
   transition: all 0.2s ease;
   box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
 }
-#howItWorks:hover{
+.btn:hover{
   background-color: black;
   scale: 1.2;
 }
-.btn{
+.btnContainer{
   display: flex;
   justify-content: center;
 }
@@ -47,8 +47,11 @@ button:disabled {
   opacity: 0.5;
   cursor: default;
 }
-img {
-  min-width: 150px;
-  max-width: 350px;
-  max-height: 100%;
+@media (max-width: 500px) {
+  .contentIntro{
+    grid-area: 1/1/4/4;
+  }
+  .btn{
+    background-color: black;
+  }
 }

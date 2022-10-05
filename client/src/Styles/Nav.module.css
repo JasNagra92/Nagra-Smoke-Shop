@@ -50,3 +50,12 @@ h5{
     color: orange;
     font-size: 2rem;
 }
+@media (max-width: 500px){
+    .Logo{
+        display: none;
+    }
+    .NavContainer{
+        display: flex;
+        justify-content: center;
+    }
+}

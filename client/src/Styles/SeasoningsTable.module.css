@@ -1,3 +1,4 @@
+
 .seasoningsContainer{
     display: flex;
     flex-direction: column;
@@ -28,4 +29,19 @@
     padding: 20px;
     text-align: center;
     text-decoration: underline;
+}
+@media (max-width: 500px) {
+    .seasoningDescription{
+        display: none;
+    }
+    .seasoningsContainer{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .seasoning{
+        height: 200px;
+    }
+    .seasoningTr{
+        justify-content: center;
+    }
 }

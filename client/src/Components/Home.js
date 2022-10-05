@@ -33,8 +33,8 @@ const Home = () => {
                     <span id={styles.nagra}>Nagra</span> Smoke House
                   </h1>
                 </div>
-                <div className={styles.btn}>
-                  <button id={styles.howItWorks} onClick={() => handleClick()}>
+                <div className={styles.btnContainer}>
+                  <button className={styles.btn} onClick={() => handleClick()}>
                     Our Menu
                   </button>
                 </div>

@@ -49,15 +49,6 @@ const DarkNavbar = () => {
             </NavLink>
           </div>
           <div>
-            <p>ABOUT US</p>
-          </div>
-          <div>
-            <p>GALLERY</p>
-          </div>
-          <div>
-            <p>SERVICES</p>
-          </div>
-          <div>
             <NavLink
               to="/menu"
               className={({ isActive }) =>
@@ -67,9 +58,7 @@ const DarkNavbar = () => {
               <p>MENU</p>
             </NavLink>
           </div>
-          <div>
-            <p>TEAM</p>
-          </div>
+
           {user && (
             <div
               className={({ isActive }) =>

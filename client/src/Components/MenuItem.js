@@ -19,10 +19,10 @@ const MenuItem = (props) => {
     <div className={styles.mainContainer}>
       <div className={styles.topHalf}>
         <div className={styles.imgContainer}>
-          <img src={image} alt="" />
+          <img className={styles.image} src={image} alt="" />
         </div>
         <div className={styles.description}>
-          <h3 style={{ textAlign: "left", color: "black" }}>
+          <h3 className={styles.heading}>
             Smoked {item.name}
           </h3>
           <p>{item.description}</p>

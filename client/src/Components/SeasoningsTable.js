@@ -16,7 +16,7 @@ const SeasoningsTable = () => {
             <a href="https://therubshack.ca/product/killer-hogs-the-hot-bbq-rub/">
               <img className={styles.seasoning} src={hot} alt="" />
             </a>
-            <p>
+            <p className={styles.seasoningDescription}>
               We’re packing heat. This Hot BBQ Rub is a savory, sweet and spicy
               punch of power-packed flavor. And you can’t beat the pretty,
               mahogany color it gives to pork, beef, seafood, or poultry. When
@@ -28,7 +28,7 @@ const SeasoningsTable = () => {
             <a href="https://therubshack.ca/product/killer-hogs-the-bbq-rub/">
               <img className={styles.seasoning} src={bbq} alt="" />
             </a>
-            <p>
+            <p className={styles.seasoningDescription}>
               Killer Hogs Championship BBQ Team The BBQ Rub. You don’t win BBQ
               Championships without knowing a thing or two about seasoning meat.
               And this rub has it all. flavor. balance. sweetness. and a nice
@@ -40,7 +40,7 @@ const SeasoningsTable = () => {
             <a href="https://bestbbqrubs.ca/collections/bbq-rubs/products/killer-hogs-tx-brisket-rub?variant=31816843034697">
               <img className={styles.seasoning} src={tx} alt="" />
             </a>
-            <p>
+            <p className={styles.seasoningDescription}>
               It's a fact the best Brisket comes from Texas. And it's the
               simplicity of salt, pepper, smoke, and fire that makes it so
               delicious. Use TX Brisket Rub for a brisket with authentic Texas
@@ -52,7 +52,7 @@ const SeasoningsTable = () => {
             <a href="https://bestbbqrubs.ca/products/meat-church-honey-hog-bbq-rub?_pos=2&_psq=meat%20church%20honey&_ss=e&_v=1.0&variant=39426683568201">
               <img className={styles.seasoning} src={honey} alt="" />
             </a>
-            <p>
+            <p className={styles.seasoningDescription}>
               "This BBQ rub comes from our southern upbringing. This sweet rub
               is excellent on pork ribs, pulled pork, poultry and vegetables.
               You can apply it to anything you like and the color is amazing." -
@@ -63,7 +63,7 @@ const SeasoningsTable = () => {
             <a href="https://bestbbqrubs.ca/products/meat-church-the-holy-gospel-bbq-rub?_pos=1&_psq=the%20gospel&_ss=e&_v=1.0&variant=39426683732041">
               <img className={styles.seasoning} src={gospel} alt="" />
             </a>
-            <p>
+            <p className={styles.seasoningDescription}>
               "The Holy Gospel BBQ Rub, taking the best elements of Holy Cow and
               The Gospel and.... NO, it's not a 50-50 blend. This took tons of
               test cooks to get it right. We saw plenty of folks mashing two
@@ -77,7 +77,7 @@ const SeasoningsTable = () => {
             <a href="https://bestbbqrubs.ca/products/meat-church-holy-cow-bbq-rub?_pos=2&_psq=holy%20cow&_ss=e&_v=1.0&variant=39426683404361">
               <img className={styles.seasoning} src={holy} alt="" />
             </a>
-            <p>
+            <p className={styles.seasoningDescription}>
               This BBQ rub screams Texas! If you have been to Franklin, Kreuz,
               Blacks or Smittys then you know what I am talking about. This
               beefy BBQ seasoning is fantastic on brisket, tri-tip and steaks,
