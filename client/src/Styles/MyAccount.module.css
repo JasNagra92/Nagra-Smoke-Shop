@@ -1,0 +1,22 @@
+.displayContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.headingsContainer{
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    border-radius: 10px;
+    padding: 0 15px;
+    background-color: white;
+    color: black;
+    width: 80%;
+}
+.headingsContainer > p {
+    font-weight: bold;
+    font-size: .85rem;
+    width: 100px;
+}

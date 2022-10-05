@@ -46,5 +46,7 @@ h5{
     color: orange;
 }
 #nagra{
-    font-family: 'Alex Brush'
+    font-family: 'Alex Brush';
+    color: orange;
+    font-size: 2rem;
 }

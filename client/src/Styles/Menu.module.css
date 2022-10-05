@@ -1,17 +1,7 @@
 .menuContainer{
-    height: 100vh
+    background-color: #F5F5F5;
+    padding-top: 10px;
 }
 h5{
     padding-top: 10px;
-}
-.mapContainer{
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-    gap: 10px;
-    align-items: center;
-}
-.address{
-    color: white;
-    font-weight: bold;
 }

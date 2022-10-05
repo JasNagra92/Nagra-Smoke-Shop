@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import CartItem from "../Components/CartItem";
 import { CartContext } from "./CartContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 import { toast } from "react-toastify";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -21,9 +22,9 @@ const Cart = () => {
   const [order, setOrder] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [disabledDates, setDisabledDates] = useState();
+  const { user } = useAuthContext()
   const [customerInfo, setCustomerInfo] = useState({
     name: "",
-    email: "",
   });
 
   const errorToast = () => {
@@ -51,6 +52,7 @@ const Cart = () => {
   // send cart information along with customer info to server to create stripe checkout session
   // this will redirect the user to the url sent in the response from the server
   const handleSubmit = async () => {
+    setCustomerInfo({ ...customerInfo, email: user.email })
     const response = await axios.post("/create-checkout-session", { payload });
     const data = response.data;
     if (data.error) {
@@ -128,7 +130,7 @@ const Cart = () => {
       ) : (
         <div>
           <div className={styles.heading}>
-            <h2>Your Order</h2>
+            <h2 className={styles.heading}>Your Order</h2>
           </div>
           <div className={styles.cartContainer}>
             <div className={styles.cartDiv}>
