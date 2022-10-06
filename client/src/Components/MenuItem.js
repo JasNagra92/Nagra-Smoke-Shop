@@ -13,7 +13,7 @@ const MenuItem = ({ item, image, smImage, onChangeInput, addItem }) => {
 
   return (
     <div className={styles.mainContainer}>
-      <div className={styles.topHalf}>
+      <div className={styles.topHalf}>  
         <div className={styles.imgContainer}>
           <img
             className={styles.image}

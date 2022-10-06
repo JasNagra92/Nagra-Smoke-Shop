@@ -3,14 +3,12 @@ import CartItem from "../Components/CartItem";
 import { CartContext } from "./CartContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { toast } from "react-toastify";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "../Styles/Cart.module.css";
 import axios from "axios";
 import CustomerInfoForm from "./CustomerInfoForm";
 import smPork from "../Images/Pork-Butt-small.jpg";
 import smBrisket from "../Images/brisket-small.jpeg";
-import { addDays, setHours, setMinutes } from "date-fns";
 const qs = require("qs");
 
 // react_app_baseURL is env variable provided by heroku on hosting
@@ -22,7 +20,6 @@ const Cart = () => {
   const [disableBtn, setDisableBtn] = useState(true);
   const [order, setOrder] = useState([]);
   const [startDate, setStartDate] = useState(null);
-  const [disabledDates, setDisabledDates] = useState();
   const { user } = useAuthContext();
   const [customerInfo, setCustomerInfo] = useState({
     name: "",
@@ -54,7 +51,7 @@ const Cart = () => {
 
   // disable checkout button until all fields are flled in
   useEffect(() => {
-    if (customerInfo.email && customerInfo.name && startDate) {
+    if (customerInfo.email && customerInfo.name && customerInfo.phoneNumber & startDate) {
       setDisableBtn(false);
     } else {
       setDisableBtn(true);
@@ -64,7 +61,6 @@ const Cart = () => {
   // send cart information along with customer info to server to create stripe checkout session
   // this will redirect the user to the url sent in the response from the server
   const handleSubmit = async () => {
-    setCustomerInfo({ ...customerInfo, email: user.user.email });
     const response = await axios.post("/create-checkout-session", { payload });
     const data = response.data;
     if (data.error) {
@@ -107,32 +103,6 @@ const Cart = () => {
     }
   }, []);
 
-  // function returns an array of Date objects made from list of
-  // dates recieved from the server through a Get request that
-  // queries the database of existing orders and sends back
-  // existing pick up dates
-  const formattedDates = (array) => {
-    let excludedDates = [];
-    for (const date of array) {
-      excludedDates.push(new Date(date));
-    }
-    return excludedDates;
-  };
-
-  // on component mount get requeset recieves existing orders
-  // pick up dates and stores them in disabled dates state array
-  // to be given to react date picker to disable those dates
-  // to prevent 2 orders being picked up on the same day, smoker
-  // is too small to time multiple pick ups on same day
-  useEffect(() => {
-    const getDates = async () => {
-      const response = await axios.get("/getExcludedDates");
-
-      setDisabledDates(formattedDates(response.data));
-    };
-    getDates();
-  }, []);
-
   return (
     <div>
       {cart.length === 0 ? (
@@ -149,6 +119,10 @@ const Cart = () => {
                   customerInfo={customerInfo}
                   handleInput={handleInput}
                   fillInfo={fillInfo}
+                  setStartDate={setStartDate}
+                  startDate={startDate}
+                  disableBtn={disableBtn}
+                  handleSubmit={handleSubmit}
                 />
               </div>
               <div className={styles.itemAndTotalContainer}>

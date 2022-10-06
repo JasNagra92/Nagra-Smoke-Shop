@@ -2,7 +2,17 @@
     display: flex;
     flex-direction: column;
     background-color: white;
+    gap: 15px;
 }
-.mainContainer label {
-    color: black;
+.mainContainer input{
+    border-radius: 4px;
+    padding: 0 15px;
+    width: 100%;
+}
+.fillBtn, .submitBtn{
+    border-radius: 4px;
+}
+.submitBtn{
+    color: white;
+    background-color: #F25C04
 }

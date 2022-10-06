@@ -16,9 +16,8 @@ a:hover{
     color: orange;
     transition: .2s ease-in-out;
 }
-Navlink p{
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+a p{
+    margin: 0;
 }
 .NavContainer{
     display: flex;
