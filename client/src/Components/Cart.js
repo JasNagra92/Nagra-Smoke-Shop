@@ -8,6 +8,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import styles from "../Styles/Cart.module.css";
 import axios from "axios";
 import CustomerInfoForm from "./CustomerInfoForm";
+import smPork from '../Images/Pork-Butt-small.jpg'
+import smBrisket from '../Images/brisket-small.jpeg'
 import { addDays, setHours, setMinutes } from "date-fns";
 const qs = require("qs");
 
@@ -21,10 +23,10 @@ const Cart = () => {
   const [order, setOrder] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [disabledDates, setDisabledDates] = useState();
-  const { user } = useAuthContext()
+  const { user } = useAuthContext();
   const [customerInfo, setCustomerInfo] = useState({
     name: `${user.foundUser.name}`,
-    phoneNumber: `${user.foundUser.phoneNumber}`
+    phoneNumber: `${user.foundUser.phoneNumber}`,
   });
 
   const errorToast = () => {
@@ -52,7 +54,7 @@ const Cart = () => {
   // send cart information along with customer info to server to create stripe checkout session
   // this will redirect the user to the url sent in the response from the server
   const handleSubmit = async () => {
-    setCustomerInfo({ ...customerInfo, email: user.user.email })
+    setCustomerInfo({ ...customerInfo, email: user.user.email });
     const response = await axios.post("/create-checkout-session", { payload });
     const data = response.data;
     if (data.error) {
@@ -128,65 +130,27 @@ const Cart = () => {
           <p>Cart is empty!</p>
         </div>
       ) : (
-        <div>
-          <div className={styles.heading}>
-            <h2 className={styles.heading}>Your Order</h2>
-          </div>
-          <div className={styles.cartContainer}>
-            <div className={styles.cartDiv}>
-              <div className={styles.tableDiv}>
-                <div className={styles.headingsContainer}>
-                  <div>
-                    <p className={styles.cartHeadings}>Item</p>
-                  </div>
-                  <div className={styles.qpContainer}>
-                    <p className={styles.cartHeadings}>Quantity</p>
-                    <p className={styles.cartHeadings}>Price</p>
-                  </div>
-                </div>
+        <div className={styles.mainContainer}>
+          <div className="container">
+            <h3 className={styles.heading}>Checkout Summary</h3>
+            <div className={styles.contentContainer}>
+              <div className={styles.formContainer}>
+                <CustomerInfoForm
+                  customerInfo={customerInfo}
+                  handleInput={handleInput}
+                />
+              </div>
+              <div>
                 {order.map((item) => (
-                  <CartItem
-                    key={item._id}
-                    itemProps={item}
-                    handleRemoveProps={handleRemove}
-                  />
+                  <div className={styles.menuItem}>
+                    <CartItem
+                      image={item.name === 'Brisket' ? smBrisket : smPork}
+                      key={item._id}
+                      itemProps={item}
+                      handleRemoveProps={handleRemove}
+                    />
+                  </div>
                 ))}
-                <div className={styles.totalDiv}>
-                  <button
-                    className={styles.cartBtn}
-                    onClick={handleSubmit}
-                    disabled={disableBtn}
-                  >
-                    checkout
-                  </button>
-                  <h4 className={styles.total}>
-                    Total: $
-                    {order.reduce(
-                      (total, current) =>
-                        total + current.price * current.quantity,
-                      0
-                    )}
-                  </h4>
-                </div>
-                <div className={styles.customerForm}>
-                  <CustomerInfoForm
-                    handleInput={handleInput}
-                    customerInfo={customerInfo}
-                  />
-                  <label>Pickup Date:</label>
-                  <DatePicker
-                    selected={startDate}
-                    onChange={(date) => setStartDate(date)}
-                    minDate={addDays(new Date(), 4)}
-                    excludeDates={disabledDates}
-                    showTimeSelect
-                    minTime={setHours(setMinutes(new Date(), 0), 18)}
-                    maxTime={setHours(setMinutes(new Date(), 0), 22)}
-                    timeFormat="HH:mm"
-                    dateFormat="MMMM,d,yyyy h:mm aa"
-                    placeholderText="Pick a day for pickup"
-                  />
-                </div>
               </div>
             </div>
           </div>
@@ -196,3 +160,33 @@ const Cart = () => {
   );
 };
 export default Cart;
+
+{
+  /* <DatePicker
+selected={startDate}
+onChange={(date) => setStartDate(date)}
+minDate={addDays(new Date(), 4)}
+excludeDates={disabledDates}
+showTimeSelect
+minTime={setHours(setMinutes(new Date(), 0), 18)}
+maxTime={setHours(setMinutes(new Date(), 0), 22)}
+timeFormat="HH:mm"
+dateFormat="MMMM,d,yyyy h:mm aa"
+placeholderText="Pick a day for pickup"
+/>
+          {order.map((item) => (
+            <CartItem
+              key={item._id}
+              itemProps={item}
+              handleRemoveProps={handleRemove}
+            />
+          ))}
+
+          <button
+          className={styles.cartBtn}
+          onClick={handleSubmit}
+          disabled={disableBtn}
+        >
+          checkout
+        </button> */
+}

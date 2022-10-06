@@ -1,9 +1,8 @@
+import styles from "../Styles/form.module.css"
+
 const CustomerInfoForm = ({ customerInfo, handleInput }) => {
   return (
-      <div style={{
-        display: 'flex',
-        gap: '10px'
-      }}>
+      <div className={styles.mainContainer}>
         <label>Name:</label>
         <input
           type="text"
@@ -11,6 +10,14 @@ const CustomerInfoForm = ({ customerInfo, handleInput }) => {
           value={customerInfo.name}
           onChange={(e) => handleInput(e)}
           placeholder="Name"
+        />
+        <label>Phone Number:</label>
+        <input
+          type="text"
+          name="phoneNumber"
+          value={customerInfo.phoneNumber}
+          onChange={(e) => handleInput(e)}
+          placeholder="Phone Number"
         />
       </div>
   );
