@@ -1,39 +1,27 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext} from "react";
 import { CartContext } from "./CartContext";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { motion } from "framer-motion";
 import { Puff } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import Modal from "./Modal";
 import axios from "axios";
 import brisket from "../Images/brisket.jpg";
 import pork from "../Images/Pork-Butt.jpg";
+import smPork from '../Images/Pork-Butt-small.jpg'
+import smBrisket from '../Images/brisket-small.jpeg'
 import styles from "../Styles/Menu.module.css";
 import MenuItem from "./MenuItem";
 import SeasoningsTable from "./SeasoningsTable";
 axios.defaults.baseURL =
   process.env.REACT_APP_baseURL || "http://localhost:4000";
 
-const Menu = () => {
+const Menu = ({ menuItems }) => {
   const [cart, setCart] = useContext(CartContext);
-  const [menuItems, setMenuItems] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const { user } = useAuthContext();
 
   // use effect will retrieve items and their prices from the server to prevent price
   // manipulation and set them in state variable
-  useEffect(() => {
-    const getMenuItems = async () => {
-      const data = await axios.get("/api/menu");
-      const menuArray = data.data.items;
-      const menu = menuArray.map((menuItem) => {
-        return { ...menuItem, quantity: 1 };
-      });
-
-      setMenuItems(menu);
-    };
-    getMenuItems();
-  }, []);
 
   const itemAdded = () => {
     toast.success("Item Added to Cart!", {
@@ -87,12 +75,14 @@ const Menu = () => {
         <div>
           <div className="container">
             <MenuItem
+              smImage={smBrisket}
               image={brisket}
               addItem={handleClick}
               item={menuItems[0]}
               onChange={onChangeInput}
             />
             <MenuItem
+              smImage={smPork}
               image={pork}
               addItem={handleClick}
               item={menuItems[1]}

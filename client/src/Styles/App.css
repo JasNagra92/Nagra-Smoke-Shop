@@ -1,15 +1,16 @@
+@media (min-width: 900px){
 .background{
   background-image: url('../Images/Home2.jpeg');
   background-size: cover;
   background-position: center;
 }
+}
 .overlay{
   background-color: rgba(0,0,0,0.4);
   box-shadow:inset 0px 20px 30px 30px rgba(0,0,0,0.9)
 }
-@media (max-width: 500px){
+@media (max-width: 899px){
   .background{
-    background-image: url('../Images/mobileBrisket.jpg');
-    background-size: cover;
+    background-image: url('../Images/mobileBrisket.jpeg');
   }
 }
