@@ -12,10 +12,16 @@ router.post("/", async (req, res) => {
 
   try {
     const user = await User.signup(email, password, passwordConfirm, name, phoneNumber);
+    
+    const foundUser = {
+      name: user.name,
+      phoneNumber: user.phoneNumber,
+      email: user.email
+    }
 
     const token = createToken(user._id);
 
-    res.status(200).json({ email, token });
+    res.status(200).json({ foundUser, token });
   } catch (error) {
     res.status(200).json({ error: error.message });
   }

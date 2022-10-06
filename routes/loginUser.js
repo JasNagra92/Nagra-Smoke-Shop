@@ -13,10 +13,15 @@ router.post("/", async (req, res) => {
 
   try {
     const user = await User.login(email, password);
-
+    
+    const foundUser = {
+      phoneNumber: user.phoneNumber,
+      name: user.name,
+      email: user.email
+    }
     const token = createToken(user._id);
 
-    res.status(200).json({ email, token });
+    res.status(200).json({ foundUser, token });
   } catch (error) {
     res.status(200).json({ error: error.message });
   }

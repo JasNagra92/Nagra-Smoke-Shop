@@ -23,7 +23,8 @@ const Cart = () => {
   const [disabledDates, setDisabledDates] = useState();
   const { user } = useAuthContext()
   const [customerInfo, setCustomerInfo] = useState({
-    name: "",
+    name: `${user.foundUser.name}`,
+    phoneNumber: `${user.foundUser.phoneNumber}`
   });
 
   const errorToast = () => {
@@ -51,7 +52,7 @@ const Cart = () => {
   // send cart information along with customer info to server to create stripe checkout session
   // this will redirect the user to the url sent in the response from the server
   const handleSubmit = async () => {
-    setCustomerInfo({ ...customerInfo, email: user.email })
+    setCustomerInfo({ ...customerInfo, email: user.user.email })
     const response = await axios.post("/create-checkout-session", { payload });
     const data = response.data;
     if (data.error) {
