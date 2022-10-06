@@ -32,7 +32,7 @@ const MenuItem = (props) => {
             Order Now
           </button>
           <p>Available Stock: {item.stock}</p>
-          <p>Price: {item.price}</p>
+          <p>Price: {item.priceStr}</p>
           <p>
             <Select
               menuPortalTarget={document.body}

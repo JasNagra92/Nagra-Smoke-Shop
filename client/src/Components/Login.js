@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { toast } from 'react-toastify'
 import useLogin from "../hooks/useLogin";
 import styles from "../Styles/Auth.module.css";
 
@@ -16,10 +15,6 @@ const Login = () => {
     e.preventDefault();
 
     login(email, password);
-  };
-
-  const loggedin = () => {
-    toast.success("Successfully Logged In!");
   };
 
   useEffect(() => {
