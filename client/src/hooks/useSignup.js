@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from 'react-toastify'
 import axios from "axios";
 import { useAuthContext } from "./useAuthContext";
 
@@ -7,11 +8,15 @@ export const useSignup = () => {
   const [isLoading, setIsLoading] = useState(null);
   const { dispatch } = useAuthContext();
 
-  const signup = async (email, password) => {
+  const signedUp = () => {
+    toast.success("Signed Up Successfully! Check email for Confirmation")
+  }
+
+  const signup = async (email, password, passwordConfirm, name, phoneNumber) => {
     setIsLoading(true);
     setError(null);
 
-    const response = await axios.post("/signup", { email, password });
+    const response = await axios.post("/signup", { email, password, passwordConfirm, name, phoneNumber });
     if (response.data.error) {
       setIsLoading(false);
       setError(response.data.error);
@@ -24,6 +29,8 @@ export const useSignup = () => {
     dispatch({ type: "LOGIN", payload: response.data });
 
     setIsLoading(false);
+
+    signedUp()
   };
 
   return { signup, isLoading, error };

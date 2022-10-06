@@ -13,11 +13,19 @@ userSchema = new Schema({
     type: String,
     required: true,
   },
+  name: {
+    type: String,
+    required: true
+  },
+  phoneNumber: {
+    type: String,
+    required: true
+  }
 });
 
 // create static signup function with password hashing
 
-userSchema.statics.signup = async function (email, password) {
+userSchema.statics.signup = async function (email, password, passwordConfirm, name, phoneNumber) {
   //validation
   if (!email || !password) {
     throw Error("all fields must be filled");
@@ -27,6 +35,12 @@ userSchema.statics.signup = async function (email, password) {
   }
   if (!validator.isStrongPassword(password)) {
     throw Error("password not strong enough");
+  }
+  if (!validator.equals(password, passwordConfirm)) {
+    throw Error("passwords must match")
+  }
+  if (!validator.isMobilePhone(phoneNumber)) {
+    throw Error ("must be a valid phone number")
   }
 
   const exists = await this.findOne({ email });
@@ -38,7 +52,7 @@ userSchema.statics.signup = async function (email, password) {
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
 
-  const user = await this.create({ email, password: hash });
+  const user = await this.create({ email, password: hash, name, phoneNumber });
 
   return user;
 };

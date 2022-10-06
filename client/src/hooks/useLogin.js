@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from 'react-toastify'
 import axios from "axios";
 import { useAuthContext } from "./useAuthContext";
 
@@ -6,6 +7,10 @@ const useLogin = () => {
   const [isloading, setLoading] = useState(null);
   const [error, setError] = useState(null);
   const { dispatch } = useAuthContext();
+
+  const loggedIn = () => {
+    toast.success("Logged In Successfully!")
+  }
 
   const login = async (email, password) => {
     const response = await axios.post("/login", { email, password });
@@ -22,6 +27,8 @@ const useLogin = () => {
     dispatch({ type: "LOGIN", payload: response.data });
 
     setLoading(false);
+
+    loggedIn()
   };
 
   return { login, isloading, error };

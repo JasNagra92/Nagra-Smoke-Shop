@@ -17,6 +17,7 @@ const DarkNavbar = () => {
 
   const handleClick = () => {
     logout();
+    Navigate('/')
   };
 
   return (

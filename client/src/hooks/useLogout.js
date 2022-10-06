@@ -1,10 +1,15 @@
 import { useAuthContext } from "./useAuthContext";
+import { toast } from 'react-toastify'
 import { CartContext } from "../Components/CartContext";
 import { useContext } from "react";
 
 const useLogout = () => {
   const { dispatch } = useAuthContext();
   const [ cart, setCart ] = useContext(CartContext)
+
+  const loggedOut = () => {
+    toast.success("logged out, have a great day!")
+  }
 
   const logout = () => {
 
@@ -16,6 +21,8 @@ const useLogout = () => {
 
     // remove user from global state
     dispatch({ type: "LOGOUT" });
+
+    loggedOut()
   };
 
   return { logout };

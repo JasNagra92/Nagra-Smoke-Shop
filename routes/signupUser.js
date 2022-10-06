@@ -8,10 +8,10 @@ const createToken = (_id) => {
 };
 
 router.post("/", async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, passwordConfirm, name, phoneNumber } = req.body;
 
   try {
-    const user = await User.signup(email, password);
+    const user = await User.signup(email, password, passwordConfirm, name, phoneNumber);
 
     const token = createToken(user._id);
 
