@@ -8,8 +8,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import styles from "../Styles/Cart.module.css";
 import axios from "axios";
 import CustomerInfoForm from "./CustomerInfoForm";
-import smPork from '../Images/Pork-Butt-small.jpg'
-import smBrisket from '../Images/brisket-small.jpeg'
+import smPork from "../Images/Pork-Butt-small.jpg";
+import smBrisket from "../Images/brisket-small.jpeg";
 import { addDays, setHours, setMinutes } from "date-fns";
 const qs = require("qs");
 
@@ -25,8 +25,9 @@ const Cart = () => {
   const [disabledDates, setDisabledDates] = useState();
   const { user } = useAuthContext();
   const [customerInfo, setCustomerInfo] = useState({
-    name: `${user.foundUser.name}`,
-    phoneNumber: `${user.foundUser.phoneNumber}`,
+    name: "",
+    email: "",
+    phoneNumber: "",
   });
 
   const errorToast = () => {
@@ -42,6 +43,15 @@ const Cart = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  const fillInfo = () => {
+    setCustomerInfo({
+      name: `${user.foundUser.name}`,
+      email: `${user.foundUser.email}`,
+      phoneNumber: `${user.foundUser.phoneNumber}`,
+    });
+  };
+
   // disable checkout button until all fields are flled in
   useEffect(() => {
     if (customerInfo.email && customerInfo.name && startDate) {
@@ -138,19 +148,28 @@ const Cart = () => {
                 <CustomerInfoForm
                   customerInfo={customerInfo}
                   handleInput={handleInput}
+                  fillInfo={fillInfo}
                 />
               </div>
-              <div>
-                {order.map((item) => (
-                  <div className={styles.menuItem}>
-                    <CartItem
-                      image={item.name === 'Brisket' ? smBrisket : smPork}
-                      key={item._id}
-                      itemProps={item}
-                      handleRemoveProps={handleRemove}
-                    />
+              <div className={styles.itemAndTotalContainer}>
+                <div>
+                  {order.map((item) => (
+                    <div className={styles.menuItem}>
+                      <CartItem
+                        image={item.name === "Brisket" ? smBrisket : smPork}
+                        key={item._id}
+                        itemProps={item}
+                        handleRemoveProps={handleRemove}
+                      />
+                    </div>
+                  ))}
+                </div>
+                <div className={styles.totalContainer}>
+                  <div className={styles.total}>
+                    <h5>Total</h5>
+                    <p>$100</p>
                   </div>
-                ))}
+                </div>
               </div>
             </div>
           </div>

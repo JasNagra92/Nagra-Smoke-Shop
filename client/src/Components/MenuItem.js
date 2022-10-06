@@ -1,11 +1,7 @@
 import styles from "../Styles/MenuItem.module.css";
 import Select from "react-select";
 
-const MenuItem = (props) => {
-  const addItem = props.addItem;
-  const onChangeInput = props.onChange;
-  const { item, image, smImage } = props;
-
+const MenuItem = ({ item, image, smImage, onChangeInput, addItem }) => {
   const options = [
     { value: "hot", label: "Hot BBQ rub" },
     { value: "bbq", label: "The BBQ rub" },
@@ -19,12 +15,16 @@ const MenuItem = (props) => {
     <div className={styles.mainContainer}>
       <div className={styles.topHalf}>
         <div className={styles.imgContainer}>
-          <img className={styles.image} src={image} alt="" srcSet={`${image} 1200w, ${smImage} 100w`} sizes="(max-width: 500px)100px, 1200px"/>
+          <img
+            className={styles.image}
+            src={image}
+            alt=""
+            srcSet={`${image} 1200w, ${smImage} 100w`}
+            sizes="(max-width: 500px)100px, 1200px"
+          />
         </div>
         <div className={styles.description}>
-          <h3 className={styles.heading}>
-            Smoked {item.name}
-          </h3>
+          <h3 className={styles.heading}>Smoked {item.name}</h3>
           <p>{item.description}</p>
         </div>
         <div className={styles.btnContainer}>
