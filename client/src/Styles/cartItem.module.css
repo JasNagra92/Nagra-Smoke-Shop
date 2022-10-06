@@ -1,7 +1,11 @@
 .cartItem {
   display: flex;
   gap: 5px;
-  width: 300px;
+}
+@media (min-width: 768px){
+  .cartItem{
+    width:300px
+  }
 }
 .imageContainer {
   border-radius: 10px;
