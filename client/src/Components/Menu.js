@@ -20,9 +20,6 @@ const Menu = ({ menuItems }) => {
   const [openModal, setOpenModal] = useState(false);
   const { user } = useAuthContext();
 
-  // use effect will retrieve items and their prices from the server to prevent price
-  // manipulation and set them in state variable
-
   const itemAdded = () => {
     toast.success("Item Added to Cart!", {
       position: toast.POSITION.TOP_CENTER,

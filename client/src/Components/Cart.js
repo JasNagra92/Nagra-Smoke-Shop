@@ -153,33 +153,3 @@ const Cart = () => {
   );
 };
 export default Cart;
-
-{
-  /* <DatePicker
-selected={startDate}
-onChange={(date) => setStartDate(date)}
-minDate={addDays(new Date(), 4)}
-excludeDates={disabledDates}
-showTimeSelect
-minTime={setHours(setMinutes(new Date(), 0), 18)}
-maxTime={setHours(setMinutes(new Date(), 0), 22)}
-timeFormat="HH:mm"
-dateFormat="MMMM,d,yyyy h:mm aa"
-placeholderText="Pick a day for pickup"
-/>
-          {order.map((item) => (
-            <CartItem
-              key={item._id}
-              itemProps={item}
-              handleRemoveProps={handleRemove}
-            />
-          ))}
-
-          <button
-          className={styles.cartBtn}
-          onClick={handleSubmit}
-          disabled={disableBtn}
-        >
-          checkout
-        </button> */
-}
